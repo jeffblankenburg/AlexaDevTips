@@ -1,0 +1,28 @@
+{
+  "askcliStatesVersion": "2020-03-31",
+  "profiles": {
+    "default": {
+      "skillInfrastructure": {
+        "@ask-cli/lambda-deployer": {
+          "deployState": {
+            "default": {
+              "iamRole": "arn:aws:iam::679180307287:role/ask-lambda-AlexaDevTips-1589384880853",
+              "lambda": {
+                "arn": "arn:aws:lambda:us-east-1:679180307287:function:ask-alexadevtips-default-default-1589384881546",
+                "lastModified": "2020-05-27T22:54:26.813+0000",
+                "revisionId": "0186aac9-24ee-4662-9cf3-279e9d5a7608"
+              }
+            }
+          }
+        }
+      },
+      "skillId": "amzn1.ask.skill.a44bb8bf-29d5-4912-868d-80e1c8b9d4d8",
+      "skillMetadata": {
+        "lastDeployHash": "OY6N8/rCAr4X56mg332w8hBHGO0="
+      },
+      "code": {
+        "default": {}
+      }
+    }
+  }
+}

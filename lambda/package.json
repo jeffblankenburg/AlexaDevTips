@@ -1,0 +1,21 @@
+{
+  "name": "alexadevtips",
+  "version": "1.1.0",
+  "description": "alexa utility for quickly building skills",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint '**/*.js'",
+    "validate": "concurrently npm:lint npm:test -c \"bgGreen,bgCyan\""
+  },
+  "author": "Jeff Blankenburg",
+  "license": "ISC",
+  "dependencies": {
+    "airtable": "^0.8.1",
+    "ask-sdk-core": "^2.6.0",
+    "ask-sdk-model": "^1.18.0",
+    "assert": "^2.0.0",
+    "aws-sdk": "^2.675.0",
+    "https": "^1.0.0"
+  }
+}

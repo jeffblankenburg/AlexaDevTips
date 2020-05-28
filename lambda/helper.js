@@ -1,15 +1,3 @@
-module.exports = {
-  getSpokenWords,
-  getResolvedWords,
-  getRandomItem,
-  supportsAPL,
-  isEntitled,
-  wrapSpeechcon,
-  changeVoice,
-  setAction,
-  getLocale,
-};
-
 function setAction(handlerInput, action) {
   const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
   sessionAttributes.previousAction = action;
@@ -114,3 +102,15 @@ function changeVoice(speech, handlerInput) {
     );
   } else return speech;
 }
+
+module.exports = {
+  getSpokenWords,
+  getResolvedWords,
+  getRandomItem,
+  supportsAPL,
+  isEntitled,
+  wrapSpeechcon,
+  changeVoice,
+  setAction,
+  getLocale,
+};

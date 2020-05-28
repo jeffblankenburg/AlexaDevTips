@@ -1,9 +1,7 @@
 const Alexa = require("ask-sdk-core");
-const AWS = require("aws-sdk");
 const https = require("https");
-const Airtable = require("airtable");
+const airtable = require("./airtable");
 var helper = require("./helper.js");
-var voices = require("./voices.js");
 const handlers = require("./handler");
 
 const LaunchRequestHandler = {
@@ -175,39 +173,7 @@ async function getRandomSpeech(table, locale) {
   return speech.fields.VoiceResponse;
 }
 
-async function getUserRecord(handlerInput) {
-  console.log("GETTING USER RECORD");
-  var userId = handlerInput.requestEnvelope.session.user.userId;
-  var filter =
-    "&filterByFormula=%7BUserId%7D%3D%22" + encodeURIComponent(userId) + "%22";
-  const userRecord = await httpGet(
-    process.env.airtable_base_data,
-    filter,
-    "User"
-  );
-  //IF THERE ISN"T A USER RECORD, CREATE ONE.
-  if (userRecord.records.length === 0) {
-    console.log("CREATING NEW USER RECORD");
-    var airtable = new Airtable({ apiKey: process.env.airtable_api_key }).base(
-      process.env.airtable_base_data
-    );
-    return new Promise((resolve, reject) => {
-      airtable("User").create({ UserId: userId }, function (err, record) {
-        console.log("NEW USER RECORD = " + JSON.stringify(record));
-        if (err) {
-          console.error(err);
-          return;
-        }
-        resolve(record);
-      });
-    });
-  } else {
-    console.log(
-      "RETURNING FOUND USER RECORD = " + JSON.stringify(userRecord.records[0])
-    );
-    return userRecord.records[0];
-  }
-}
+async function getUserRecord(handlerInput) {}
 
 const RequestLog = {
   async process(handlerInput) {
@@ -215,7 +181,7 @@ const RequestLog = {
       "REQUEST ENVELOPE = " + JSON.stringify(handlerInput.requestEnvelope)
     );
     const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-    var userRecord = await getUserRecord(handlerInput);
+    const userRecord = await airtable.getUserRecord(handlerInput);
     sessionAttributes.user = userRecord.fields;
     sessionAttributes.isError = false;
     console.log("USER RECORD = " + JSON.stringify(userRecord.fields));

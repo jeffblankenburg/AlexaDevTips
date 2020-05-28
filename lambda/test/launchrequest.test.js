@@ -1,16 +1,14 @@
-const assert = require('assert');
+const launchRequestHandler = require("../handler/launchRequest");
+const JSON = require("./launchRequest.json");
 
-describe('Age Tests', () => {
-  it('Nothing should be @jeffblankenburg 5 years, 7 months', () => {
-    commands
-      .age('')
-      .then((r) =>
-        assert.equal(
-          r,
-          '@jeffblankenburg has been on Twitch for 5 years, 7 months.',
-        ),
-      );
-  });
+//launchRequestHandler(JSON).then((r) => console.log(JSON.stringify(r)));
+
+test("Should not be an error", async () => {
+  const data = await launchRequestHandler(JSON);
+  expect(data.sessionAttributes.isError).toBe(false);
 });
 
-
+test("Should be a launch request", async () => {
+  const data = await launchRequestHandler(JSON);
+  expect(data.sessionAttributes.previousAction).toBe("LAUNCHREQUEST");
+});

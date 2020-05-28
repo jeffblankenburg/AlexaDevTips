@@ -50,6 +50,19 @@ const HelpIntentHandler = {
   },
 };
 
+const RepeatIntentHandler = {
+  canHandle(handlerInput) {
+    return (
+      Alexa.getRequestType(handlerInput.requestEnvelope) === "IntentRequest" &&
+      Alexa.getIntentName(handlerInput.requestEnvelope) ===
+        "AMAZON.RepeatIntent"
+    );
+  },
+  async handle(handlerInput) {
+    return handlers.repeatIntent(handlerInput);
+  },
+};
+
 const CancelAndStopIntentHandler = {
   canHandle(handlerInput) {
     return (
@@ -79,10 +92,6 @@ const SessionEndedRequestHandler = {
   },
 };
 
-// The intent reflector is used for interaction model testing and debugging.
-// It will simply repeat the intent the user said. You can create custom handlers
-// for your intents by defining them above, then also adding them to the request
-// handler chain below.
 const IntentReflectorHandler = {
   canHandle(handlerInput) {
     return (
@@ -90,22 +99,10 @@ const IntentReflectorHandler = {
     );
   },
   async handle(handlerInput) {
-    console.log("<=== INTENT REFLECTOR HANDLER ===>");
-    const locale = helper.getLocale(handlerInput);
-    const intentName = Alexa.getIntentName(handlerInput.requestEnvelope);
-    const speakOutput = `You just triggered ${intentName}`;
-
-    var actionQuery = await getRandomSpeech("ActionQuery", locale);
-    return handlerInput.responseBuilder
-      .speak(helper.changeVoice(speakOutput + " " + actionQuery, handlerInput))
-      .reprompt(helper.changeVoice(actionQuery, handlerInput))
-      .getResponse();
+    return await handlers.intentReflector(handlerInput);
   },
 };
 
-// Generic error handling to capture any syntax or routing errors. If you receive an error
-// stating the request handler chain is not found, you have not implemented a handler for
-// the intent being invoked or included it in the skill builder below.
 const ErrorHandler = {
   canHandle() {
     return true;
@@ -115,70 +112,9 @@ const ErrorHandler = {
   },
 };
 
-function httpGet(base, filter, table = "Data") {
-  var options = {
-    host: "api.airtable.com",
-    port: 443,
-    path:
-      "/v0/" +
-      base +
-      "/" +
-      table +
-      "?api_key=" +
-      process.env.airtable_api_key +
-      filter,
-    method: "GET",
-  };
-  //console.log("FULL PATH = http://" + options.host + options.path);
-  return new Promise((resolve, reject) => {
-    const request = https.request(options, (response) => {
-      response.setEncoding("utf8");
-      let returnData = "";
-      if (response.statusCode < 200 || response.statusCode >= 300) {
-        return reject(
-          new Error(
-            `${response.statusCode}: ${response.req.getHeader("host")} ${
-              response.req.path
-            }`
-          )
-        );
-      }
-      response.on("data", (chunk) => {
-        returnData += chunk;
-      });
-      response.on("end", () => {
-        resolve(JSON.parse(returnData));
-      });
-      response.on("error", (error) => {
-        reject(error);
-      });
-    });
-    request.end();
-  });
-}
-
-async function getRandomSpeech(table, locale) {
-  const response = await httpGet(
-    process.env.airtable_base_speech,
-    "&filterByFormula=AND(IsDisabled%3DFALSE(),FIND(%22" +
-      locale +
-      "%22%2C+Locale)!%3D0)",
-    table
-  );
-  const speech = helper.getRandomItem(response.records);
-  console.log(
-    "RANDOM [" + table.toUpperCase() + "] = " + JSON.stringify(speech)
-  );
-  return speech.fields.VoiceResponse;
-}
-
-async function getUserRecord(handlerInput) {}
-
 const RequestLog = {
   async process(handlerInput) {
-    console.log(
-      "REQUEST ENVELOPE = " + JSON.stringify(handlerInput.requestEnvelope)
-    );
+    console.log(`REQ ENV ${JSON.stringify(handlerInput.requestEnvelope)}`);
     const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
     const userRecord = await airtable.getUserRecord(handlerInput);
     sessionAttributes.user = userRecord.fields;
@@ -189,10 +125,15 @@ const RequestLog = {
 
 const ResponseLog = {
   process(handlerInput) {
-    console.log(
-      "RESPONSE BUILDER = " +
-        JSON.stringify(handlerInput.responseBuilder.getResponse())
-    );
+    const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+    const response = handlerInput.responseBuilder.getResponse();
+    console.log("RESPONSE BUILDER = " + JSON.stringify(response));
+    sessionAttributes.previousSpeak = response.outputSpeech.ssml
+      .replace("<speak>", "")
+      .replace("</speak>", "");
+    sessionAttributes.previousReprompt = response.reprompt.outputSpeech.ssml
+      .replace("<speak>", "")
+      .replace("</speak>", "");
   },
 };
 
@@ -204,6 +145,7 @@ exports.handler = Alexa.SkillBuilders.custom()
     LaunchRequestHandler,
     SpeechconIntentHandler,
     HelpIntentHandler,
+    RepeatIntentHandler,
     ChangeVoiceIntentHandler,
     CancelAndStopIntentHandler,
     SessionEndedRequestHandler,

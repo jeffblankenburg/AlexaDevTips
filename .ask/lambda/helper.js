@@ -103,10 +103,17 @@ function changeVoice(speech, handlerInput) {
   } else return speech;
 }
 
+function getIntentName(handlerInput) {
+  if (handlerInput.requestEnvelope.request.intent.name != undefined)
+    return handlerInput.requestEnvelope.request.intent.name;
+  else return handlerInput.requestEnvelope.request.type;
+}
+
 module.exports = {
   getSpokenWords,
   getResolvedWords,
   getRandomItem,
+  getIntentName,
   supportsAPL,
   isEntitled,
   wrapSpeechcon,

@@ -1,14 +1,14 @@
-const airtable = require("../airtable");
-const helper = require("../helper");
+const airtable = require(`../airtable`);
+const helper = require(`../helper`);
 
 async function changeVoiceIntent(handlerInput) {
-  console.log("<=== handlers/changeVoiceIntent.js ===>");
-  helper.setAction(handlerInput, "CHANGEVOICEINTENT");
+  console.log(`<=== handlers/changeVoiceIntent.js ===>`);
+  helper.setAction(handlerInput, `CHANGEVOICEINTENT`);
   const locale = helper.getLocale(handlerInput);
 
-  const spokenWords = helper.getSpokenWords(handlerInput, "voice");
-  const resolvedWords = helper.getResolvedWords(handlerInput, "voice");
-  let speakOutput = "";
+  const spokenWords = helper.getSpokenWords(handlerInput, `voice`);
+  const resolvedWords = helper.getResolvedWords(handlerInput, `voice`);
+  let speakOutput = ``;
   if (resolvedWords != undefined) {
     await airtable.updateUserPollyVoice(
       handlerInput,
@@ -20,9 +20,9 @@ async function changeVoiceIntent(handlerInput) {
     speakOutput = `${spokenWords} is not the name of a Polly voice. `;
   }
 
-  var actionQuery = await airtable.getRandomSpeech("ActionQuery", locale);
+  var actionQuery = await airtable.getRandomSpeech(`ActionQuery`, locale);
   return handlerInput.responseBuilder
-    .speak(helper.changeVoice(speakOutput + " " + actionQuery, handlerInput))
+    .speak(helper.changeVoice(`${speakOutput} ${actionQuery}`, handlerInput))
     .reprompt(helper.changeVoice(actionQuery, handlerInput))
     .getResponse();
 }

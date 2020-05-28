@@ -125,15 +125,12 @@ const RequestLog = {
 
 const ResponseLog = {
   process(handlerInput) {
-    const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-    const response = handlerInput.responseBuilder.getResponse();
-    console.log("RESPONSE BUILDER = " + JSON.stringify(response));
-    sessionAttributes.previousSpeak = response.outputSpeech.ssml
-      .replace("<speak>", "")
-      .replace("</speak>", "");
-    sessionAttributes.previousReprompt = response.reprompt.outputSpeech.ssml
-      .replace("<speak>", "")
-      .replace("</speak>", "");
+    console.log(
+      `RESPONSE BUILDER = ${JSON.stringify(
+        handlerInput.responseBuilder.getResponse()
+      )}`
+    );
+    helper.putRepeatData(handlerInput);
   },
 };
 

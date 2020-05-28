@@ -5,7 +5,7 @@ async function intentReflector(handlerInput) {
   console.log("<=== handler/intentReflector.js ===>");
   const locale = helper.getLocale(handlerInput);
   const intentName = helper.getIntentName(handlerInput);
-  const speakOutput = `You just triggered ${intentName}`;
+  const speakOutput = `You just triggered ${intentName}. `;
 
   var actionQuery = await airtable.getRandomSpeech("ActionQuery", locale);
   return handlerInput.responseBuilder

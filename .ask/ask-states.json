@@ -9,8 +9,8 @@
               "iamRole": "arn:aws:iam::679180307287:role/ask-lambda-AlexaDevTips-1589384880853",
               "lambda": {
                 "arn": "arn:aws:lambda:us-east-1:679180307287:function:ask-alexadevtips-default-default-1589384881546",
-                "lastModified": "2020-05-28T17:33:48.532+0000",
-                "revisionId": "565ffc56-f409-4c4b-836b-75cb8cbff432"
+                "lastModified": "2020-05-28T21:16:27.204+0000",
+                "revisionId": "dc2209c8-d3cf-479a-b823-e19ce9c9d42b"
               }
             }
           }

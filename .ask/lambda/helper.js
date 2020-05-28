@@ -109,6 +109,25 @@ function getIntentName(handlerInput) {
   else return handlerInput.requestEnvelope.request.type;
 }
 
+function putRepeatData(handlerInput) {
+  const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+  const response = handlerInput.responseBuilder.getResponse();
+  if (response.outputSpeech && response.outputSpeech.ssml) {
+    sessionAttributes.previousSpeak = response.outputSpeech.ssml
+      .replace("<speak>", "")
+      .replace("</speak>", "");
+  }
+  if (
+    response.reprompt &&
+    response.reprompt.outputSpeech &&
+    response.reprompt.outputSpeech.ssml
+  ) {
+    sessionAttributes.previousReprompt = response.reprompt.outputSpeech.ssml
+      .replace("<speak>", "")
+      .replace("</speak>", "");
+  }
+}
+
 module.exports = {
   getSpokenWords,
   getResolvedWords,
@@ -120,4 +139,5 @@ module.exports = {
   changeVoice,
   setAction,
   getLocale,
+  putRepeatData,
 };

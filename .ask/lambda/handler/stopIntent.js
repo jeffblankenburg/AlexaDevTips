@@ -9,7 +9,7 @@ async function stopIntent(handlerInput) {
   const speakOutput = await airtable.getRandomSpeech("Goodbye", locale);
   const actionQuery = await airtable.getRandomSpeech("ActionQuery", locale);
   return handlerInput.responseBuilder
-    .speak(helper.changeVoice(speakOutput + " " + actionQuery, handlerInput))
+    .speak(helper.changeVoice(`${speakOutput} ${actionQuery}`, handlerInput))
     .getResponse();
 }
 

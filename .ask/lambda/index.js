@@ -92,10 +92,6 @@ const SessionEndedRequestHandler = {
   },
 };
 
-// The intent reflector is used for interaction model testing and debugging.
-// It will simply repeat the intent the user said. You can create custom handlers
-// for your intents by defining them above, then also adding them to the request
-// handler chain below.
 const IntentReflectorHandler = {
   canHandle(handlerInput) {
     return (
@@ -107,9 +103,6 @@ const IntentReflectorHandler = {
   },
 };
 
-// Generic error handling to capture any syntax or routing errors. If you receive an error
-// stating the request handler chain is not found, you have not implemented a handler for
-// the intent being invoked or included it in the skill builder below.
 const ErrorHandler = {
   canHandle() {
     return true;
@@ -121,9 +114,7 @@ const ErrorHandler = {
 
 const RequestLog = {
   async process(handlerInput) {
-    console.log(
-      "REQUEST ENVELOPE = " + JSON.stringify(handlerInput.requestEnvelope)
-    );
+    console.log(`REQ ENV ${JSON.stringify(handlerInput.requestEnvelope)}`);
     const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
     const userRecord = await airtable.getUserRecord(handlerInput);
     sessionAttributes.user = userRecord.fields;
@@ -134,15 +125,12 @@ const RequestLog = {
 
 const ResponseLog = {
   process(handlerInput) {
-    const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-    const response = handlerInput.responseBuilder.getResponse();
-    console.log("RESPONSE BUILDER = " + JSON.stringify(response));
-    sessionAttributes.previousSpeak = response.outputSpeech.ssml
-      .replace("<speak>", "")
-      .replace("</speak>", "");
-    sessionAttributes.previousReprompt = response.reprompt.outputSpeech.ssml
-      .replace("<speak>", "")
-      .replace("</speak>", "");
+    console.log(
+      `RESPONSE BUILDER = ${JSON.stringify(
+        handlerInput.responseBuilder.getResponse()
+      )}`
+    );
+    helper.putRepeatData(handlerInput);
   },
 };
 

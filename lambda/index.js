@@ -1,6 +1,6 @@
 const Alexa = require("ask-sdk-core");
 const airtable = require("./airtable");
-var helper = require("./helper.js");
+const helper = require("./helper.js");
 const handlers = require("./handler");
 
 const LaunchRequestHandler = {

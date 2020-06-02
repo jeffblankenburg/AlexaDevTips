@@ -2,6 +2,7 @@ const Alexa = require("ask-sdk-core");
 const airtable = require("./airtable");
 const helper = require("./helper.js");
 const handlers = require("./handler");
+const AMAZON = require("./AMAZON");
 
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
@@ -9,8 +10,8 @@ const LaunchRequestHandler = {
       Alexa.getRequestType(handlerInput.requestEnvelope) === "LaunchRequest"
     );
   },
-  async handle(handlerInput) {
-    return await handlers.launchRequest(handlerInput);
+  handle(handlerInput) {
+    return handlers.LaunchRequest(handlerInput);
   },
 };
 
@@ -46,7 +47,19 @@ const HelpIntentHandler = {
     );
   },
   async handle(handlerInput) {
-    return handlers.helpIntent(handlerInput);
+    return AMAZON.HelpIntent(handlerInput);
+  },
+};
+
+const AnswerIntentHandler = {
+  canHandle(handlerInput) {
+    return (
+      Alexa.getRequestType(handlerInput.requestEnvelope) === "IntentRequest" &&
+      Alexa.getIntentName(handlerInput.requestEnvelope) === "AnswerIntent"
+    );
+  },
+  async handle(handlerInput) {
+    return handlers.AnswerIntent(handlerInput);
   },
 };
 
@@ -59,7 +72,7 @@ const RepeatIntentHandler = {
     );
   },
   async handle(handlerInput) {
-    return handlers.repeatIntent(handlerInput);
+    return AMAZON.RepeatIntent(handlerInput);
   },
 };
 
@@ -74,7 +87,7 @@ const CancelAndStopIntentHandler = {
     );
   },
   async handle(handlerInput) {
-    return handlers.stopIntent(handlerInput);
+    return AMAZON.StopIntent(handlerInput);
   },
 };
 
@@ -140,6 +153,7 @@ const ResponseLog = {
 exports.handler = Alexa.SkillBuilders.custom()
   .addRequestHandlers(
     LaunchRequestHandler,
+    AnswerIntentHandler,
     SpeechconIntentHandler,
     HelpIntentHandler,
     RepeatIntentHandler,

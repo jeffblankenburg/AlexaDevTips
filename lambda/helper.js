@@ -1,3 +1,5 @@
+const _ = require("lodash");
+
 function setAction(handlerInput, action) {
   const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
   sessionAttributes.previousAction = action;
@@ -8,16 +10,11 @@ function getLocale(handlerInput) {
 }
 
 function getSpokenWords(handlerInput, slot) {
-  if (
-    handlerInput.requestEnvelope &&
-    handlerInput.requestEnvelope.request &&
-    handlerInput.requestEnvelope.request.intent &&
-    handlerInput.requestEnvelope.request.intent.slots &&
-    handlerInput.requestEnvelope.request.intent.slots[slot] &&
-    handlerInput.requestEnvelope.request.intent.slots[slot].value
-  )
-    return handlerInput.requestEnvelope.request.intent.slots[slot].value;
-  else return undefined;
+  return _.get(
+    handlerInput,
+    `requestEnvelope.request.intent.slots[${slot}].value`
+  );
+  //return handlerInput?.requestEnvelope?.request?.intent?.slots?.[slot]?.value?
 }
 
 function getResolvedWords(handlerInput, slot) {
@@ -31,6 +28,12 @@ function getResolvedWords(handlerInput, slot) {
     handlerInput.requestEnvelope.request.intent.slots[slot].resolutions
       .resolutionsPerAuthority
   ) {
+    console.log(
+      `RESOLUTIONS = ${JSON.stringify(
+        handlerInput.requestEnvelope.request.intent.slots[slot].resolutions
+          .resolutionsPerAuthority[0].values
+      )}`
+    );
     for (
       var i = 0;
       i <
@@ -50,6 +53,16 @@ function getResolvedWords(handlerInput, slot) {
           .resolutions.resolutionsPerAuthority[i].values;
     }
   } else return undefined;
+}
+
+function getDisambiguationString(values) {
+  let string = "";
+  for (var i = 0; i < values.length; i++) {
+    if (i != 0) string += ", ";
+    if (i === values.length - 1) string += " or ";
+    string += values[i].value.name;
+  }
+  return string;
 }
 
 function supportsAPL(handlerInput) {
@@ -131,6 +144,7 @@ function putRepeatData(handlerInput) {
 module.exports = {
   getSpokenWords,
   getResolvedWords,
+  getDisambiguationString,
   getRandomItem,
   getIntentName,
   supportsAPL,

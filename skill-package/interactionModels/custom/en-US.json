@@ -95,6 +95,10 @@
           ]
         },
         {
+          "name": "APLTemplateIntent",
+          "samples": ["show me an APL video"]
+        },
+        {
           "name": "GetNewsIntent",
           "slots": [],
           "samples": [

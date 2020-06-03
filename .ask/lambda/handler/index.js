@@ -1,17 +1,19 @@
 const AnswerIntent = require("./AnswerIntent");
 const APLTemplateIntent = require("./APLTemplateIntent");
-const changeVoiceIntent = require("./changeVoiceIntent");
+const ChangeVoiceIntent = require("./ChangeVoiceIntent");
 const LaunchRequest = require("./LaunchRequest");
-const speechconIntent = require("./speechconIntent");
+const PersonalInfoIntent = require("./PersonalInfoIntent");
+const SpeechconIntent = require("./SpeechconIntent");
 const error = require("./error");
 const intentReflector = require("./intentReflector");
 
 module.exports = {
   AnswerIntent,
   APLTemplateIntent,
-  changeVoiceIntent,
+  ChangeVoiceIntent,
   LaunchRequest,
-  speechconIntent,
+  PersonalInfoIntent,
+  SpeechconIntent,
   error,
   intentReflector,
 };

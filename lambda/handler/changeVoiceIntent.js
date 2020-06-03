@@ -1,8 +1,8 @@
 const airtable = require(`../airtable`);
 const helper = require(`../helper`);
 
-async function changeVoiceIntent(handlerInput) {
-  console.log(`<=== handlers/changeVoiceIntent.js ===>`);
+async function ChangeVoiceIntent(handlerInput) {
+  console.log(`<=== handlers/ChangeVoiceIntent.js ===>`);
   helper.setAction(handlerInput, `CHANGEVOICEINTENT`);
   const locale = helper.getLocale(handlerInput);
 
@@ -27,4 +27,4 @@ async function changeVoiceIntent(handlerInput) {
     .getResponse();
 }
 
-module.exports = changeVoiceIntent;
+module.exports = ChangeVoiceIntent;

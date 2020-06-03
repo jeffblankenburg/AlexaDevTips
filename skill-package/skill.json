@@ -30,6 +30,48 @@
         }
       }
     },
-    "manifestVersion": "1.0"
+    "manifestVersion": "1.0",
+    "permissions": [
+      {
+        "name": "alexa::devices:all:address:full:read"
+      },
+      {
+        "name": "alexa::skill:proactive_enablement"
+      },
+      {
+        "name": "alexa::alerts:timers:skill:readwrite"
+      },
+      {
+        "name": "alexa::profile:mobile_number:read"
+      },
+      {
+        "name": "alexa::profile:email:read"
+      },
+      {
+        "name": "alexa::profile:name:read"
+      },
+      {
+        "name": "alexa::household:lists:read"
+      },
+      {
+        "name": "alexa::household:lists:write"
+      },
+      {
+        "name": "alexa::alerts:reminders:skill:readwrite"
+      }
+    ],
+    "privacyAndCompliance": {
+      "allowsPurchases": false,
+      "usesPersonalInfo": false,
+      "isChildDirected": false,
+      "isExportCompliant": true,
+      "containsAds": false,
+      "locales": {
+        "en-US": {
+          "privacyPolicyUrl": "http://www.myprivacypolicy.sampleskill.com",
+          "termsOfUseUrl": "http://www.termsofuse.sampleskill.com"
+        }
+      }
+    }
   }
 }

@@ -31,6 +31,22 @@
           "samples": ["off"]
         },
         {
+          "name": "PersonalInfoIntent",
+          "slots": [
+            {
+              "name": "infotype",
+              "type": "InfoType"
+            }
+          ],
+          "samples": [
+            "what is my personal info",
+            "what is my {infotype}",
+            "tell me my {infotype}",
+            "for my {infotype}",
+            "for my personal info"
+          ]
+        },
+        {
           "name": "AnswerIntent",
           "slots": [
             {
@@ -141,6 +157,43 @@
         }
       ],
       "types": [
+        {
+          "name": "InfoType",
+          "values": [
+            {
+              "id": "email_address",
+              "name": {
+                "value": "email address",
+                "synonyms": ["email"]
+              }
+            },
+            {
+              "id": "given_name",
+              "name": {
+                "value": "given name",
+                "synonyms": ["first name"]
+              }
+            },
+            {
+              "id": "full_name",
+              "name": {
+                "value": "full name"
+              }
+            },
+            {
+              "id": "mobile_number",
+              "name": {
+                "value": "mobile number",
+                "synonyms": [
+                  "mobile",
+                  "phone number",
+                  "digits",
+                  "telephone number"
+                ]
+              }
+            }
+          ]
+        },
         {
           "name": "APLTemplate",
           "values": [

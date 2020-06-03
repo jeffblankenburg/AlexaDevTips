@@ -1,8 +1,8 @@
 const airtable = require("../airtable");
 const helper = require("../helper");
 
-async function speechconIntent(handlerInput) {
-  console.log("<=== handlers/speechconIntent.js ===>");
+async function SpeechconIntent(handlerInput) {
+  console.log("<=== handlers/SpeechconIntent.js ===>");
   helper.setAction(handlerInput, "SPEECHCONINTENT");
   var locale = helper.getLocale(handlerInput);
 
@@ -27,4 +27,4 @@ async function speechconIntent(handlerInput) {
     .getResponse();
 }
 
-module.exports = speechconIntent;
+module.exports = SpeechconIntent;

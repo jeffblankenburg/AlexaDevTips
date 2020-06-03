@@ -96,7 +96,13 @@
         },
         {
           "name": "APLTemplateIntent",
-          "samples": ["show me an APL video"]
+          "slots": [
+            {
+              "name": "apltemplate",
+              "type": "APLTemplate"
+            }
+          ],
+          "samples": ["show me the APL {apltemplate}"]
         },
         {
           "name": "GetNewsIntent",
@@ -135,6 +141,64 @@
         }
       ],
       "types": [
+        {
+          "name": "APLTemplate",
+          "values": [
+            {
+              "id": "image_display_sample",
+              "name": {
+                "value": "image display sample",
+                "synonyms": ["image display"]
+              }
+            },
+            {
+              "id": "long_text_sample",
+              "name": {
+                "value": "long text sample",
+                "synonyms": ["long text"]
+              }
+            },
+            {
+              "id": "short_text_sample",
+              "name": {
+                "value": "short text sample",
+                "synonyms": ["short text"]
+              }
+            },
+            {
+              "id": "image_right_detail_sample",
+              "name": {
+                "value": "image right detail sample",
+                "synonyms": ["image right", "image right detail"]
+              }
+            },
+            {
+              "id": "image_left_detail_sample",
+              "name": {
+                "value": "image left detail sample",
+                "synonyms": ["image left", "image left detail"]
+              }
+            },
+            {
+              "id": "image_forward_list_sample",
+              "name": {
+                "value": "image forward list sample",
+                "synonyms": [
+                  "image forward",
+                  "image forward list",
+                  "image list"
+                ]
+              }
+            },
+            {
+              "id": "text_forward_list_sample",
+              "name": {
+                "value": "text forward list sample",
+                "synonyms": ["text forward", "text forward list", "text list"]
+              }
+            }
+          ]
+        },
         {
           "name": "DisplayTemplate",
           "values": [

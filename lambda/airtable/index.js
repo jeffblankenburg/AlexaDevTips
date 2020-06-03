@@ -1,4 +1,3 @@
-const get = require("./get");
 const getItemByRecordId = require("./getItemByRecordId");
 const getRandomSpeech = require("./getRandomSpeech");
 const getRandomSpeechcon = require("./getRandomSpeechcon");
@@ -8,7 +7,6 @@ const updateUserAnswers = require("./updateUserAnswers");
 const getUserRecord = require("./getUserRecord");
 
 module.exports = {
-  get,
   getItemByRecordId,
   getRandomSpeech,
   getRandomSpeechcon,

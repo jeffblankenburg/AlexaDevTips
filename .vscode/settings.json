@@ -1,11 +1,10 @@
 {
-    "git.ignoreLimitWarning": true,
-    "editor.rulers": [80],
-    "editor.formatOnSave": true,
-    "prettier.tabWidth": 2,
-    "editor.tabSize": 2,
-    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true
-    }
+  "git.ignoreLimitWarning": true,
+  "editor.rulers": [90],
+  "editor.formatOnSave": true,
+  "prettier.tabWidth": 2,
+  "editor.tabSize": 2,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
   }
-  
+}

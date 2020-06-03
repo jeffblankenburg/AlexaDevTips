@@ -63,6 +63,18 @@ const AnswerIntentHandler = {
   },
 };
 
+const APLTemplateIntentHandler = {
+  canHandle(handlerInput) {
+    return (
+      Alexa.getRequestType(handlerInput.requestEnvelope) === "IntentRequest" &&
+      Alexa.getIntentName(handlerInput.requestEnvelope) === "APLTemplateIntent"
+    );
+  },
+  async handle(handlerInput) {
+    return handlers.APLTemplateIntent(handlerInput);
+  },
+};
+
 const RepeatIntentHandler = {
   canHandle(handlerInput) {
     return (
@@ -154,6 +166,7 @@ exports.handler = Alexa.SkillBuilders.custom()
   .addRequestHandlers(
     LaunchRequestHandler,
     AnswerIntentHandler,
+    APLTemplateIntentHandler,
     SpeechconIntentHandler,
     HelpIntentHandler,
     RepeatIntentHandler,

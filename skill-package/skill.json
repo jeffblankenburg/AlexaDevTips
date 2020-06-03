@@ -20,6 +20,11 @@
     },
     "apis": {
       "custom": {
+        "interfaces": [
+          {
+            "type": "ALEXA_PRESENTATION_APL"
+          }
+        ],
         "endpoint": {
           "uri": "arn:aws:lambda:us-east-1:679180307287:function:ask-alexadevtips-default-default-1589384881546"
         }

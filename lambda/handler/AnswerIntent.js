@@ -24,8 +24,7 @@ async function AnswerIntent(handlerInput) {
       resolvedWords
     )}?`;
   } else {
-    //TODO: What do we say when a user doesn't match something in our database?
-    //TODO: Give the user a random tip that they haven't heard before.
+    //TODO: WHAT DO WE DO IF THEY HAVE HEARD ALL THE THINGS?
     const answer = await airtable.getRandomUnusedAnswer(handlerInput);
     console.log(`ANSWER = ${JSON.stringify(answer)}`);
     speakOutput = `I picked a random topic for you: ${answer.fields.Name}. ${answer.fields.VoiceResponse} `;

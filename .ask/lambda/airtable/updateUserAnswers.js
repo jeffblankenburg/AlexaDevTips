@@ -1,6 +1,7 @@
 const Airtable = require("airtable");
 
 async function updateUserAnswers(handlerInput, recordId) {
+  console.log(`<=== airtable/updateUserAnswers.js ===>`);
   const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
   let userAnswers = sessionAttributes.user.Answer;
   if (userAnswers === undefined) userAnswers = [];

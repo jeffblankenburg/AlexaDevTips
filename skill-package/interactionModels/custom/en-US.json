@@ -43,6 +43,7 @@
             "what is my {infotype}",
             "tell me my {infotype}",
             "for my {infotype}",
+            "how do i {infotype}",
             "for my personal info"
           ]
         },
@@ -161,6 +162,35 @@
           "name": "InfoType",
           "values": [
             {
+              "id": "distance_units",
+              "name": {
+                "value": "distance units",
+                "synonyms": [
+                  "measure distance",
+                  "distance measurement",
+                  "distance measurement unit"
+                ]
+              }
+            },
+            {
+              "id": "temperature_units",
+              "name": {
+                "value": "temperature units",
+                "synonyms": [
+                  "measure temperature",
+                  "temperature measurement",
+                  "temperature measurement unit"
+                ]
+              }
+            },
+            {
+              "id": "time_zone",
+              "name": {
+                "value": "time zone",
+                "synonyms": []
+              }
+            },
+            {
               "id": "email_address",
               "name": {
                 "value": "email address",
@@ -168,17 +198,23 @@
               }
             },
             {
-              "id": "given_name",
+              "id": "name",
               "name": {
-                "value": "given name",
-                "synonyms": ["first name"]
+                "value": "name",
+                "synonyms": ["name", "full name", "profile name"]
               }
             },
             {
-              "id": "full_name",
+              "id": "geolocation",
               "name": {
-                "value": "full name",
-                "synonyms": ["name"]
+                "value": "geo location",
+                "synonyms": [
+                  "gps coordinates",
+                  "latitude and longitude",
+                  "coordinates",
+                  "dynamic location",
+                  "location"
+                ]
               }
             },
             {
@@ -190,6 +226,19 @@
                   "phone number",
                   "digits",
                   "telephone number"
+                ]
+              }
+            },
+            {
+              "id": "device_address",
+              "name": {
+                "value": "device address",
+                "synonyms": [
+                  "address",
+                  "street address",
+                  "physical address",
+                  "postal address",
+                  "postal code"
                 ]
               }
             }

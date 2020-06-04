@@ -1,0 +1,6 @@
+{
+  "handler": "lambda/index.js",
+  "interactionModel": "skill-package/interactionModels/custom/en-US.json",
+  "locales": "en-US",
+  "env": "lambda/.env"
+}

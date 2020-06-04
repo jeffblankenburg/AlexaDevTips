@@ -1,0 +1,90 @@
+2020-06-04T17:05:49.643Z error: bst-test            Error using bst-test on Node: v10.15.3
+2020-06-04T17:05:49.648Z error: bst-test            Error: The interaction model for your Alexa Skill could not be found under:
+./models/en-US.json
+Please provide the correct location of the Interaction Model.
+    at Function.Object.<anonymous>.InteractionModel.fromFile (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/node_modules/virtual-alexa/lib/src/model/InteractionModel.js:51:23)
+    at VirtualAlexaBuilder.Object.<anonymous>.VirtualAlexaBuilder.create (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/node_modules/virtual-alexa/lib/src/core/VirtualAlexa.js:169:57)
+    at VirtualAlexaInvoker.before (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/runner/VirtualAlexaInvoker.js:58:48)
+    at TestRunner.<anonymous> (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/runner/TestRunner.js:155:25)
+    at Generator.next (<anonymous>)
+    at asyncGeneratorStep (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/runner/TestRunner.js:1:130)
+    at _next (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/runner/TestRunner.js:3:194)
+    at /usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/runner/TestRunner.js:3:364
+    at new Promise (<anonymous>)
+    at TestRunner.<anonymous> (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/runner/TestRunner.js:3:97)
+2020-06-04T17:07:51.536Z error: bst-test            Error using bst-test on Node: v10.15.3
+2020-06-04T17:07:51.541Z error: bst-test            Error: The interaction model for your Alexa Skill could not be found under:
+./models/en-US.json
+Please provide the correct location of the Interaction Model.
+    at Function.Object.<anonymous>.InteractionModel.fromFile (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/node_modules/virtual-alexa/lib/src/model/InteractionModel.js:51:23)
+    at VirtualAlexaBuilder.Object.<anonymous>.VirtualAlexaBuilder.create (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/node_modules/virtual-alexa/lib/src/core/VirtualAlexa.js:169:57)
+    at VirtualAlexaInvoker.before (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/runner/VirtualAlexaInvoker.js:58:48)
+    at TestRunner.<anonymous> (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/runner/TestRunner.js:155:25)
+    at Generator.next (<anonymous>)
+    at asyncGeneratorStep (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/runner/TestRunner.js:1:130)
+    at _next (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/runner/TestRunner.js:3:194)
+    at /usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/runner/TestRunner.js:3:364
+    at new Promise (<anonymous>)
+    at TestRunner.<anonymous> (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/runner/TestRunner.js:3:97)
+2020-06-04T17:09:13.532Z error: bst-test            Error using bst-test on Node: v10.15.3
+2020-06-04T17:09:13.540Z error: bst-test            Error: The interaction model for your Alexa Skill could not be found under:
+/Users/jeffblan/GitHub/AlexaDevTips/skill-package/interactionModels/en-US.json
+Please provide the correct location of the Interaction Model.
+    at Function.Object.<anonymous>.InteractionModel.fromFile (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/node_modules/virtual-alexa/lib/src/model/InteractionModel.js:51:23)
+    at VirtualAlexaBuilder.Object.<anonymous>.VirtualAlexaBuilder.create (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/node_modules/virtual-alexa/lib/src/core/VirtualAlexa.js:169:57)
+    at VirtualAlexaInvoker.before (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/runner/VirtualAlexaInvoker.js:58:48)
+    at TestRunner.<anonymous> (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/runner/TestRunner.js:155:25)
+    at Generator.next (<anonymous>)
+    at asyncGeneratorStep (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/runner/TestRunner.js:1:130)
+    at _next (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/runner/TestRunner.js:3:194)
+    at /usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/runner/TestRunner.js:3:364
+    at new Promise (<anonymous>)
+    at TestRunner.<anonymous> (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/runner/TestRunner.js:3:97)
+2020-06-04T17:10:01.893Z error: bst-test            Error using bst-test on Node: v10.15.3
+2020-06-04T17:10:01.916Z error: bst-test            TypeError: Cannot read property 'length' of undefined
+    at Object.getRandomItem (/Users/jeffblan/GitHub/AlexaDevTips/lambda/helper.js:91:35)
+    at fetch.then.then.r (/Users/jeffblan/GitHub/AlexaDevTips/lambda/airtable/getRandomSpeech.js:14:27)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+2020-06-04T17:10:02.315Z error: bst-test            Error using bst-test on Node: v10.15.3
+2020-06-04T17:10:02.316Z error: bst-test            TypeError: Cannot read property 'length' of undefined
+    at Object.getRandomItem (/Users/jeffblan/GitHub/AlexaDevTips/lambda/helper.js:91:35)
+    at fetch.then.then.r (/Users/jeffblan/GitHub/AlexaDevTips/lambda/airtable/getRandomSpeech.js:14:27)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+2020-06-04T17:11:09.632Z error: bst-test            Error using bst-test on Node: v10.15.3
+2020-06-04T17:11:09.647Z error: bst-test            TypeError: Cannot read property 'length' of undefined
+    at Object.getRandomItem (/Users/jeffblan/GitHub/AlexaDevTips/lambda/helper.js:91:35)
+    at fetch.then.then.r (/Users/jeffblan/GitHub/AlexaDevTips/lambda/airtable/getRandomSpeech.js:14:27)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+2020-06-04T17:11:09.968Z error: bst-test            Error using bst-test on Node: v10.15.3
+2020-06-04T17:11:09.968Z error: bst-test            TypeError: Cannot read property 'length' of undefined
+    at Object.getRandomItem (/Users/jeffblan/GitHub/AlexaDevTips/lambda/helper.js:91:35)
+    at fetch.then.then.r (/Users/jeffblan/GitHub/AlexaDevTips/lambda/airtable/getRandomSpeech.js:14:27)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+2020-06-04T17:15:49.925Z error: bst-test            Error using bst-test on Node: v10.15.3
+2020-06-04T17:15:49.931Z error: bst-test            YAMLException: bad indentation of a sequence entry at line 12, column 3:
+      - response.session.attributes.pr ... 
+      ^
+    at generateError (/usr/local/lib/node_modules/bespoken-tools/node_modules/js-yaml-bespoken/lib/js-yaml/loader.js:191:10)
+    at throwError (/usr/local/lib/node_modules/bespoken-tools/node_modules/js-yaml-bespoken/lib/js-yaml/loader.js:197:9)
+    at readBlockSequence (/usr/local/lib/node_modules/bespoken-tools/node_modules/js-yaml-bespoken/lib/js-yaml/loader.js:980:7)
+    at composeNode (/usr/local/lib/node_modules/bespoken-tools/node_modules/js-yaml-bespoken/lib/js-yaml/loader.js:1377:12)
+    at readDocument (/usr/local/lib/node_modules/bespoken-tools/node_modules/js-yaml-bespoken/lib/js-yaml/loader.js:1538:3)
+    at loadDocuments (/usr/local/lib/node_modules/bespoken-tools/node_modules/js-yaml-bespoken/lib/js-yaml/loader.js:1594:5)
+    at Object.loadAll (/usr/local/lib/node_modules/bespoken-tools/node_modules/js-yaml-bespoken/lib/js-yaml/loader.js:1602:19)
+    at TestParser.parse (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/test/TestParser.js:144:30)
+    at TestRunner.parseContents (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/runner/TestRunner.js:580:21)
+    at /usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/runner/TestRunner.js:78:39
+2020-06-04T17:20:45.636Z error: bst-test            Error using bst-test on Node: v10.15.3
+2020-06-04T17:20:45.641Z error: bst-test            YAMLException: bad indentation of a sequence entry at line 12, column 5:
+        - request.session.attributes.pre ... 
+        ^
+    at generateError (/usr/local/lib/node_modules/bespoken-tools/node_modules/js-yaml-bespoken/lib/js-yaml/loader.js:191:10)
+    at throwError (/usr/local/lib/node_modules/bespoken-tools/node_modules/js-yaml-bespoken/lib/js-yaml/loader.js:197:9)
+    at readBlockSequence (/usr/local/lib/node_modules/bespoken-tools/node_modules/js-yaml-bespoken/lib/js-yaml/loader.js:980:7)
+    at composeNode (/usr/local/lib/node_modules/bespoken-tools/node_modules/js-yaml-bespoken/lib/js-yaml/loader.js:1377:12)
+    at readDocument (/usr/local/lib/node_modules/bespoken-tools/node_modules/js-yaml-bespoken/lib/js-yaml/loader.js:1538:3)
+    at loadDocuments (/usr/local/lib/node_modules/bespoken-tools/node_modules/js-yaml-bespoken/lib/js-yaml/loader.js:1594:5)
+    at Object.loadAll (/usr/local/lib/node_modules/bespoken-tools/node_modules/js-yaml-bespoken/lib/js-yaml/loader.js:1602:19)
+    at TestParser.parse (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/test/TestParser.js:144:30)
+    at TestRunner.parseContents (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/runner/TestRunner.js:580:21)
+    at /usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/runner/TestRunner.js:78:39

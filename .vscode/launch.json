@@ -5,19 +5,15 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      // Specify path to the downloaded local adapter(for nodejs) file
-      "program": "${workspaceFolder}/lambda/local-debugger.js",
-      "args": [
-        // port number on your local host where the alexa requests will be routed to
-        "--portNumber",
-        "3000",
-        // name of your nodejs main skill file
-        "--skillEntryFile",
-        "${workspaceFolder}/lambda/index.js",
-        // name of your lambda handler
-        "--lambdaHandler",
-        "handler"
-      ]
+      "program": "/usr/local/lib/node_modules/bespoken-tools/bin/bst-proxy.js",
+      "args": ["lambda", "lambda/index.js"],
+      "cwd": "${workspaceRoot}",
+      "env": {
+        "MODE": "dev",
+        "airtable_api_key": "keynLGHM8Jor40KNX",
+        "airtable_base_data": "appBPrk7Uhqlg1AR3",
+        "airtable_base_speech": "appRi0ICmhbXAZyLU"
+      }
     }
   ]
 }

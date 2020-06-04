@@ -2,7 +2,7 @@ const airtable = require("../airtable");
 const helper = require("../helper");
 
 async function StopIntent(handlerInput) {
-  console.log("<=== handlers/stopIntent.js ===>");
+  console.log("<=== AMAZON/StopIntent.js ===>");
   helper.setAction(handlerInput, "STOPINTENT");
   const locale = helper.getLocale(handlerInput);
 

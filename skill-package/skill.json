@@ -58,6 +58,9 @@
       },
       {
         "name": "alexa::alerts:reminders:skill:readwrite"
+      },
+      {
+        "name": "alexa::devices:all:geolocation:read"
       }
     ],
     "privacyAndCompliance": {

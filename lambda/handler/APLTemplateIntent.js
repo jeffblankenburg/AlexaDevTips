@@ -2,6 +2,8 @@ const airtable = require("../airtable");
 const helper = require("../helper");
 
 async function APLTemplateIntent(handlerInput) {
+  console.log(`<=== handler/APLTemplateIntent.js ===>`);
+  helper.setAction(handlerInput, `APLTEMPLATEINTENT`);
   const locale = helper.getLocale(handlerInput);
   const spokenWords = helper.getSpokenWords(handlerInput, "apltemplate");
   const resolvedWords = helper.getResolvedWords(handlerInput, "apltemplate");

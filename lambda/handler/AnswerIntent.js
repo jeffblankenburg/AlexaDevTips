@@ -3,7 +3,7 @@ const helper = require("../helper");
 
 async function AnswerIntent(handlerInput) {
   console.log(`<=== handler/AnswerIntent.js ===>`);
-
+  helper.setAction(handlerInput, "ANSWERINTENT");
   const locale = helper.getLocale(handlerInput);
   const spokenWords = helper.getSpokenWords(handlerInput, "answer");
   const resolvedWords = helper.getResolvedWords(handlerInput, "answer");

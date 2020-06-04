@@ -1,6 +1,6 @@
 {
   "git.ignoreLimitWarning": true,
-  "editor.rulers": [90],
+  "editor.rulers": [80],
   "editor.formatOnSave": true,
   "prettier.tabWidth": 2,
   "editor.tabSize": 2,

@@ -2,7 +2,7 @@ const airtable = require("../airtable");
 const helper = require("../helper");
 
 async function error(handlerInput, error) {
-  console.log("<=== handlers/error.js ===>");
+  console.log("<=== handler/error.js ===>");
   const locale = helper.getLocale(handlerInput);
   const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
   sessionAttributes.isError = true;

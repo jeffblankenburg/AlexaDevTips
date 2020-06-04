@@ -150,6 +150,11 @@ function putRepeatData(handlerInput) {
   }
 }
 
+function isGeolocationSupported(handlerInput) {
+  return handlerInput.requestEnvelope.context.System.device.supportedInterfaces
+    .Geolocation;
+}
+
 module.exports = {
   getSpokenWords,
   getResolvedWords,
@@ -159,6 +164,7 @@ module.exports = {
   getUserId,
   supportsAPL,
   isEntitled,
+  isGeolocationSupported,
   wrapSpeechcon,
   changeVoice,
   setAction,

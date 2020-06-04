@@ -2,6 +2,7 @@ const airtable = require("../airtable");
 const helper = require("../helper");
 
 async function sendPermissionsCard(handlerInput, type, permissions) {
+  console.log(`<=== profile/sendPermissionsCard.js ===>`);
   const locale = helper.getLocale(handlerInput);
   let [speakOutput, actionQuery] = await Promise.all([
     airtable.getRandomSpeech("NoPermission", locale),

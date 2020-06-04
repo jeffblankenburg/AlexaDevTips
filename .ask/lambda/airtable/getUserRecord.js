@@ -3,6 +3,7 @@ const helper = require("../helper");
 const fetch = require("node-fetch");
 
 function getUserRecord(handlerInput) {
+  console.log(`<=== airtable/getUserRecord.js ===>`);
   const userId = handlerInput.requestEnvelope.context.System.user.userId;
 
   const url = `https://api.airtable.com/v0/${

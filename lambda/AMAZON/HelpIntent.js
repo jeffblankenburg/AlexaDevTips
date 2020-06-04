@@ -2,7 +2,7 @@ const airtable = require("../airtable");
 const helper = require("../helper");
 
 async function HelpIntent(handlerInput) {
-  console.log("<=== handlers/helpIntent.js ===>");
+  console.log("<=== AMAZON/HelpIntent.js ===>");
   helper.setAction(handlerInput, "HELPINTENT");
   const locale = helper.getLocale(handlerInput);
 

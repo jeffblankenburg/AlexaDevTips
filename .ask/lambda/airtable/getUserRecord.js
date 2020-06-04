@@ -1,9 +1,9 @@
 const Airtable = require("airtable");
+const helper = require("../helper");
 const fetch = require("node-fetch");
 
 function getUserRecord(handlerInput) {
-  console.log("GETTING USER RECORD");
-  const userId = handlerInput.requestEnvelope.session.user.userId;
+  const userId = handlerInput.requestEnvelope.context.System.user.userId;
 
   const url = `https://api.airtable.com/v0/${
     process.env.airtable_base_data
@@ -18,18 +18,17 @@ function getUserRecord(handlerInput) {
     .then((res) => res.json())
     .then((r) => {
       if (r.records.length === 0) {
-        return createUserRecord();
+        return createUserRecord(userId);
       } else return r.records[0];
     });
 }
 
-function createUserRecord() {
+function createUserRecord(userId) {
   var airtable = new Airtable({ apiKey: process.env.airtable_api_key }).base(
     process.env.airtable_base_data
   );
   return new Promise((resolve, reject) => {
     airtable("User").create({ UserId: userId }, function (err, record) {
-      console.log("NEW USER RECORD = " + JSON.stringify(record));
       if (err) {
         console.error(err);
         return;

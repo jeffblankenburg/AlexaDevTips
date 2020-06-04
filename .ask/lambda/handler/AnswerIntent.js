@@ -3,7 +3,7 @@ const helper = require("../helper");
 
 async function AnswerIntent(handlerInput) {
   console.log(`<=== handler/AnswerIntent.js ===>`);
-  helper.setAction(handlerInput, "ANSWERINTENT");
+
   const locale = helper.getLocale(handlerInput);
   const spokenWords = helper.getSpokenWords(handlerInput, "answer");
   const resolvedWords = helper.getResolvedWords(handlerInput, "answer");
@@ -20,6 +20,8 @@ async function AnswerIntent(handlerInput) {
     speakOutput = `You asked me about ${answer.fields.Name}. ${answer.fields.VoiceResponse}`;
     airtable.updateUserAnswers(handlerInput, resolvedWords[0].value.id);
   } else if (resolvedWords && resolvedWords.length > 1) {
+    helper.setAction(handlerInput, "ANSWERINTENT - DISAMBIGUATION");
+    actionQuery = "";
     speakOutput = `I found ${
       resolvedWords.length
     } matches for ${spokenWords}.  Did you mean ${helper.getDisambiguationString(

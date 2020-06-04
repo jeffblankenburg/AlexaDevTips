@@ -3,6 +3,7 @@ const Airtable = require("airtable");
 async function updateUserAnswers(handlerInput, recordId) {
   const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
   let userAnswers = sessionAttributes.user.Answer;
+  if (userAnswers === undefined) userAnswers = [];
 
   if (!userAnswers.includes(recordId)) {
     userAnswers.push(recordId);

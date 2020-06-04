@@ -4,6 +4,8 @@
   "description": "alexa utility for quickly building skills",
   "main": "index.js",
   "scripts": {
+    "start": "bst proxy lambda index.js",
+    "stop": "bst proxy stop",
     "test": "jest",
     "lint": "eslint '**/*.js'",
     "validate": "concurrently npm:lint npm:test -c \"bgGreen,bgCyan\""
@@ -14,6 +16,7 @@
     "airtable": "^0.8.1",
     "ask-sdk-core": "^2.6.0",
     "ask-sdk-model": "^1.18.0",
+    "dotenv": "^8.2.0",
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {

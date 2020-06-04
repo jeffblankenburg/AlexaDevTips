@@ -1,5 +1,6 @@
 const airtable = require(`../airtable`);
 const helper = require(`../helper`);
+const profile = require("../profile");
 
 async function PersonalInfoIntent(handlerInput) {
   console.log(`<=== handler/PersonalInfoIntent.js ===>`);
@@ -7,39 +8,28 @@ async function PersonalInfoIntent(handlerInput) {
   const locale = helper.getLocale(handlerInput);
   let speakOutput = "";
 
-  const permissions = [
-    "alexa::profile:name:read",
-    "alexa::profile:email:read",
-    "alexa::profile:mobile_number:read",
-  ];
-
-  const spokenWords = helper.getSpokenWords(handlerInput);
-  const resolvedWords = helper.getResolvedWords(handlerInput);
-  try {
-    const client = handlerInput.serviceClientFactory.getUpsServiceClient();
-    const email = await client.getProfileEmail();
-    console.log(`EMAIL = ${email}`);
-  } catch (error) {
-    return handlerInput.responseBuilder
-      .speak(
-        "Please enable Customer Profile permissions in the Amazon Alexa app.  I've written a card to your app to make this easier.  What would you lke to do next?"
-      )
-      .reprompt(
-        "Please check the card in your Alexa app.  In the meantime, what would you lke to do next?"
-      )
-      .withAskForPermissionsConsentCard(permissions)
-      .getResponse();
-  }
+  const spokenWords = helper.getSpokenWords(handlerInput, "infotype");
+  const resolvedWords = helper.getResolvedWords(handlerInput, "infotype");
 
   if (resolvedWords) {
     switch (resolvedWords[0].value.id) {
       case "email_address":
-        const client = handlerInput.serviceClientFactory.getUpsServiceClient();
-        const email = await client.getProfileEmail();
-        console.log(`EMAIL = ${email}`);
+        let email = await profile.getEmail(handlerInput);
+        if (email) speakOutput = `Your profile email address is ${email}.`;
+        else
+          return profile.sendPermissionsCard(handlerInput, "email address", [
+            "alexa::profile:email:read",
+          ]);
+        break;
+      case "full_name":
+        let givenName = await profile.getName(handlerInput);
+        if (givenName) speakOutput = `Your name is ${givenName}.`;
+        else
+          return profile.sendPermissionsCard(handlerInput, "name", [
+            "alexa::profile:name:read",
+          ]);
         break;
     }
-    //TODO: RETRIEVE THE VALUE THAT WAS THE FIRST RESOLVED VALUE.
   } else {
     //TODO: GET EVERYTHING WE HAVE ACCESS TO.
     //TODO: WHAT IF WE DON'T HAVE ACCESS TO ANYTHING?  WE SHOULD ASK USER TO UPDATE PERMISSIONS.  SEND CARD.

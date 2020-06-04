@@ -9,6 +9,10 @@ function getLocale(handlerInput) {
   return handlerInput.requestEnvelope.request.locale;
 }
 
+function getUserId(handlerInput) {
+  return handlerInput.requestEnveloper.context.System.user.userId;
+}
+
 function getSpokenWords(handlerInput, slot) {
   return _.get(
     handlerInput,
@@ -19,21 +23,11 @@ function getSpokenWords(handlerInput, slot) {
 
 function getResolvedWords(handlerInput, slot) {
   if (
-    handlerInput.requestEnvelope &&
-    handlerInput.requestEnvelope.request &&
-    handlerInput.requestEnvelope.request.intent &&
-    handlerInput.requestEnvelope.request.intent.slots &&
-    handlerInput.requestEnvelope.request.intent.slots[slot] &&
-    handlerInput.requestEnvelope.request.intent.slots[slot].resolutions &&
-    handlerInput.requestEnvelope.request.intent.slots[slot].resolutions
-      .resolutionsPerAuthority
+    _.get(
+      handlerInput,
+      `requestEnvelope.request.intent.slots[${slot}].resolutions.resolutionsPerAuthority`
+    )
   ) {
-    console.log(
-      `RESOLUTIONS = ${JSON.stringify(
-        handlerInput.requestEnvelope.request.intent.slots[slot].resolutions
-          .resolutionsPerAuthority[0].values
-      )}`
-    );
     for (
       var i = 0;
       i <
@@ -162,6 +156,7 @@ module.exports = {
   getDisambiguationString,
   getRandomItem,
   getIntentName,
+  getUserId,
   supportsAPL,
   isEntitled,
   wrapSpeechcon,

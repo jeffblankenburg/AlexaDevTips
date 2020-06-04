@@ -4,6 +4,10 @@ const helper = require("./helper.js");
 const handlers = require("./handler");
 const AMAZON = require("./AMAZON");
 
+if (process.env.MODE !== "prod") {
+  require("dotenv").config();
+}
+
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
     return (
@@ -151,22 +155,17 @@ const ErrorHandler = {
 
 const RequestLog = {
   async process(handlerInput) {
-    console.log(`REQ ENV ${JSON.stringify(handlerInput.requestEnvelope)}`);
+    //console.log(`REQ ENV ${JSON.stringify(handlerInput.requestEnvelope)}`);
     const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
     const userRecord = await airtable.getUserRecord(handlerInput);
     sessionAttributes.user = userRecord.fields;
     sessionAttributes.isError = false;
-    console.log("USER RECORD = " + JSON.stringify(userRecord.fields));
   },
 };
 
 const ResponseLog = {
   process(handlerInput) {
-    console.log(
-      `RESPONSE BUILDER = ${JSON.stringify(
-        handlerInput.responseBuilder.getResponse()
-      )}`
-    );
+    //console.log(`RESPONSE BUILDER = ${JSON.stringify(handlerInput.responseBuilder.getResponse())}`);
     helper.putRepeatData(handlerInput);
   },
 };

@@ -177,7 +177,8 @@
             {
               "id": "full_name",
               "name": {
-                "value": "full name"
+                "value": "full name",
+                "synonyms": ["name"]
               }
             },
             {

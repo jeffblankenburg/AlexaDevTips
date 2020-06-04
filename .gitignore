@@ -4,3 +4,4 @@ package-lock.json
 .ask/lambda/build.zip
 lambda/.env
 .ask/lambda/.env
+package.json

@@ -4,26 +4,39 @@ const helper = require("../helper");
 async function SpeechconIntent(handlerInput) {
   console.log("<=== handler/SpeechconIntent.js ===>");
   helper.setAction(handlerInput, "SPEECHCONINTENT");
-  var locale = helper.getLocale(handlerInput);
+  const locale = helper.getLocale(handlerInput);
 
-  var spokenWords = helper.getSpokenWords(handlerInput, "speechcon");
-  var resolvedWords = helper.getResolvedWords(handlerInput, "speechcon");
-  var actionQuery = await airtable.getRandomSpeech("ActionQuery", locale);
-  var speakOutput = "";
+  const spokenWords = helper.getSpokenWords(handlerInput, "speechcon");
+  const resolvedWords = helper.getResolvedWords(handlerInput, "speechcon");
+  const actionQuery = await airtable.getRandomSpeech("ActionQuery", locale);
+  let speakOutput = "";
+  let speechcon = "";
   if (resolvedWords != undefined) {
-    speakOutput = helper.wrapSpeechcon(resolvedWords[0].value.name);
+    speechcon = resolvedWords[0].value.name;
+    speakOutput = helper.wrapSpeechcon(speechcon);
   } else {
-    var speechcon = await airtable.getRandomSpeechcon(locale);
-    speakOutput =
-      "I heard you say " +
-      spokenWords +
-      ", but that isn't a speechcon for your locale. Here's a random one instead! " +
-      helper.wrapSpeechcon(speechcon);
+    speechcon = await airtable.getRandomSpeechcon(locale);
+    if (spokenWords)
+      speakOutput =
+        "I heard you say " +
+        spokenWords +
+        ", but that isn't a speechcon for your locale. Here's a random one instead! " +
+        helper.wrapSpeechcon(speechcon);
+    else
+      speakOutput = `Here's a random speechcon for you! ${helper.wrapSpeechcon(
+        speechcon
+      )}`;
   }
 
   return handlerInput.responseBuilder
     .speak(helper.changeVoice(speakOutput + " " + actionQuery, handlerInput))
     .reprompt(helper.changeVoice(actionQuery, handlerInput))
+    .withSimpleCard(
+      speechcon,
+      `You can use this speechcon in your skill with the following syntax:\n\n${helper.wrapSpeechcon(
+        speechcon
+      )}`
+    )
     .getResponse();
 }
 

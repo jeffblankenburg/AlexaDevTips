@@ -23,7 +23,19 @@ const SpeechconIntentHandler = {
     );
   },
   async handle(handlerInput) {
-    return await handlers.speechconIntent(handlerInput);
+    return await handlers.SpeechconIntent(handlerInput);
+  },
+};
+
+const SoundEffectIntentHandler = {
+  canHandle(handlerInput) {
+    return (
+      Alexa.getRequestType(handlerInput.requestEnvelope) === "IntentRequest" &&
+      Alexa.getIntentName(handlerInput.requestEnvelope) === "SoundEffectIntent"
+    );
+  },
+  async handle(handlerInput) {
+    return await handlers.SoundEffectIntent(handlerInput);
   },
 };
 
@@ -182,6 +194,7 @@ exports.handler = Alexa.SkillBuilders.custom()
     APLTemplateIntentHandler,
     PersonalInfoIntentHandler,
     SpeechconIntentHandler,
+    SoundEffectIntentHandler,
     HelpIntentHandler,
     RepeatIntentHandler,
     ChangeVoiceIntentHandler,

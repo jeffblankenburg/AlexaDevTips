@@ -105,11 +105,45 @@ function isEntitled(product) {
 }
 
 function wrapSpeechcon(speechcon) {
-  return (
-    "<say-as interpret-as='interjection'>" +
-    speechcon +
-    "!</say-as><break time='.5s'/>"
-  );
+  return `<say-as interpret-as='interjection'> ${speechcon}!</say-as><break time='.5s'/>`;
+}
+
+function wrapSoundEffect(category, effect) {
+  return `<audio src='soundbank://soundlibrary/${category}${effect}' />`;
+}
+
+function getRandomTwoCharacterString() {
+  //This is missing the letter "e".  Yes, on purpose.
+  const alphabet = [
+    "a",
+    "b",
+    "c",
+    "d",
+    "f",
+    "g",
+    "h",
+    "i",
+    "j",
+    "k",
+    "l",
+    "m",
+    "n",
+    "o",
+    "p",
+    "q",
+    "r",
+    "s",
+    "t",
+    "u",
+    "v",
+    "w",
+    "x",
+    "y",
+    "z",
+  ];
+  const letter1 = getRandomItem(alphabet);
+  const letter2 = getRandomItem(alphabet);
+  return `${letter1}${letter2}`;
 }
 
 function changeVoice(speech, handlerInput) {
@@ -160,12 +194,14 @@ module.exports = {
   getResolvedWords,
   getDisambiguationString,
   getRandomItem,
+  getRandomTwoCharacterString,
   getIntentName,
   getUserId,
   supportsAPL,
   isEntitled,
   isGeolocationSupported,
   wrapSpeechcon,
+  wrapSoundEffect,
   changeVoice,
   setAction,
   getLocale,

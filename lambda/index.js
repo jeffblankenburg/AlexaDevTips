@@ -1,3 +1,6 @@
+//TODO: WRITE CARDS FOR LITERALLY EVERYTHING.
+//TODO: GET ALL OF THE SPEECH CONTENT INTO THE DATABASE!!
+
 const Alexa = require("ask-sdk-core");
 const airtable = require("./airtable");
 const helper = require("./helper.js");
@@ -47,7 +50,7 @@ const ChangeVoiceIntentHandler = {
     );
   },
   async handle(handlerInput) {
-    return handlers.changeVoiceIntent(handlerInput);
+    return handlers.ChangeVoiceIntent(handlerInput);
   },
 };
 

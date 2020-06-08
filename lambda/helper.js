@@ -49,14 +49,30 @@ function getResolvedWords(handlerInput, slot) {
   } else return undefined;
 }
 
-function getDisambiguationString(values) {
+async function getDisambiguationString(values) {
+  const airtable = require("./airtable");
   let string = "";
   for (var i = 0; i < values.length; i++) {
     if (i != 0) string += ", ";
     if (i === values.length - 1) string += " or ";
-    string += values[i].value.name;
+    const record = await airtable.getItemByRecordId(
+      process.env.airtable_base_data,
+      "Answer",
+      values[i].value.id
+    );
+    if (record.fields.Pronunciation) string += record.fields.Pronunciation;
+    else string += values[i].value.name;
   }
   return string;
+}
+
+function convertLinkToSpeech(link) {
+  let speech = link.replace("http://", "").replace("https://");
+  // speech = speech.split(".").join(" dot ");
+  // speech = speech.split("/").join(" slash ");
+  speech = speech.replace(/\./g, " dot ");
+  speech = speech.replace(/\//g, " slash ");
+  return speech;
 }
 
 function supportsAPL(handlerInput) {
@@ -105,7 +121,7 @@ function isEntitled(product) {
 }
 
 function wrapSpeechcon(speechcon) {
-  return `<say-as interpret-as='interjection'> ${speechcon}!</say-as><break time='.5s'/>`;
+  return `<say-as interpret-as='interjection'>${speechcon}!</say-as><break time='.5s'/>`;
 }
 
 function wrapSoundEffect(category, effect) {
@@ -117,7 +133,6 @@ function getRandomTwoCharacterString() {
   const alphabet = [
     "a",
     "b",
-    "c",
     "d",
     "f",
     "g",
@@ -190,6 +205,7 @@ function isGeolocationSupported(handlerInput) {
 }
 
 module.exports = {
+  convertLinkToSpeech,
   getSpokenWords,
   getResolvedWords,
   getDisambiguationString,

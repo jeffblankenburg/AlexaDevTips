@@ -49,12 +49,19 @@ function getResolvedWords(handlerInput, slot) {
   } else return undefined;
 }
 
-function getDisambiguationString(values) {
+async function getDisambiguationString(values) {
+  const airtable = require("./airtable");
   let string = "";
   for (var i = 0; i < values.length; i++) {
     if (i != 0) string += ", ";
     if (i === values.length - 1) string += " or ";
-    string += values[i].value.name;
+    const record = await airtable.getItemByRecordId(
+      process.env.airtable_base_data,
+      "Answer",
+      values[i].value.id
+    );
+    if (record.fields.Pronunciation) string += record.fields.Pronunciation;
+    else string += values[i].value.name;
   }
   return string;
 }
@@ -105,7 +112,7 @@ function isEntitled(product) {
 }
 
 function wrapSpeechcon(speechcon) {
-  return `<say-as interpret-as='interjection'> ${speechcon}!</say-as><break time='.5s'/>`;
+  return `<say-as interpret-as='interjection'>${speechcon}!</say-as><break time='.5s'/>`;
 }
 
 function wrapSoundEffect(category, effect) {

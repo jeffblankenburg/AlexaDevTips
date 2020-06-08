@@ -12,7 +12,9 @@
         "MODE": "dev",
         "airtable_api_key": "keynLGHM8Jor40KNX",
         "airtable_base_data": "appBPrk7Uhqlg1AR3",
-        "airtable_base_speech": "appRi0ICmhbXAZyLU"
+        "airtable_base_speech": "appRi0ICmhbXAZyLU",
+        "airtable_base_speechcon": "appSi9Ax00XGXzfOC",
+        "airtable_base_soundeffect": "app1KKeqMWQOCOCAx"
       }
     }
   ]

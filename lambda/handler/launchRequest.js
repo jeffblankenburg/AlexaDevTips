@@ -6,6 +6,7 @@ async function LaunchRequest(handlerInput) {
   helper.setAction(handlerInput, "LAUNCHREQUEST");
   const locale = helper.getLocale(handlerInput);
 
+  //TODO: IF THIS A USER'S FIRST TIME, GIVE THEM MORE BACKGROUND INFORMATION ABOUT WHAT IS POSSIBLE.
   const [speakOutput, actionQuery] = await Promise.all([
     airtable.getRandomSpeech("Welcome", locale),
     airtable.getRandomSpeech("ActionQuery", locale),

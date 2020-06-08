@@ -9,6 +9,7 @@ async function AnswerIntent(handlerInput) {
   const resolvedWords = helper.getResolvedWords(handlerInput, "answer");
   let speakOutput = "";
   let actionQuery = await airtable.getRandomSpeech("ActionQuery", locale);
+  let rb = handlerInput.responseBuilder;
 
   if (resolvedWords && resolvedWords.length === 1) {
     const answer = await airtable.getItemByRecordId(
@@ -16,30 +17,41 @@ async function AnswerIntent(handlerInput) {
       "Answer",
       resolvedWords[0].value.id
     );
-
-    speakOutput = `You asked me about ${answer.fields.Name}. ${answer.fields.VoiceResponse}`;
+    let name = answer.fields.Name;
+    if (answer.fields.Pronunciation) name = answer.fields.Pronunciation;
+    const linkIntro = await airtable.getRandomSpeech("AnswerLinkIntro", locale);
+    speakOutput = `You asked me about ${name}. ${
+      answer.fields.VoiceResponse
+    } ${linkIntro.replace(
+      "LINK",
+      helper.convertLinkToSpeech(answer.fields.Link)
+    )}`;
+    if (answer.fields.CardResponse)
+      rb.withSimpleCard(answer.fields.Name, answer.fields.CardResponse);
     airtable.updateUserAnswers(handlerInput, resolvedWords[0].value.id);
   } else if (resolvedWords && resolvedWords.length > 1) {
     helper.setAction(handlerInput, "ANSWERINTENT - DISAMBIGUATION");
     actionQuery = "";
     speakOutput = `I found ${
       resolvedWords.length
-    } matches for ${spokenWords}.  Did you mean ${helper.getDisambiguationString(
+    } matches for ${spokenWords}.  Did you mean ${await helper.getDisambiguationString(
       resolvedWords
     )}?`;
   } else {
     //TODO: WHAT DO WE DO IF THEY HAVE HEARD ALL THE THINGS?
-    //TODO: IF THEY SAID SOMETHING THAT DIDN'T MATCH, WE SHOULD LOG IT SO THAT WE CAN ADD IT.
     if (spokenWords) {
       airtable.saveMissedValue(spokenWords, "MissedAnswer");
       speakOutput = `I don't have a record for ${spokenWords}.  My apologies.  I'll do some research. Instead, `;
     }
     const answer = await airtable.getRandomUnusedAnswer(handlerInput);
-    console.log(`ANSWER = ${JSON.stringify(answer)}`);
-    speakOutput += `I picked a random topic for you: ${answer.fields.Name}. ${answer.fields.VoiceResponse} `;
+    if (answer.fields.CardResponse)
+      rb.withSimpleCard(answer.fields.Name, answer.fields.CardResponse);
+    let name = answer.fields.Name;
+    if (answer.fields.Pronunciation) name = answer.fields.Pronunciation;
+    speakOutput += `I picked a random topic for you: ${name}. ${answer.fields.VoiceResponse} `;
   }
 
-  return handlerInput.responseBuilder
+  return rb
     .speak(helper.changeVoice(`${speakOutput} ${actionQuery}`, handlerInput))
     .reprompt(helper.changeVoice(actionQuery, handlerInput))
     .getResponse();

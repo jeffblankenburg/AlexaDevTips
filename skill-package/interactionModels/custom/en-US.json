@@ -112,6 +112,26 @@
           ]
         },
         {
+          "name": "TimerIntent",
+          "slots": [
+            {
+              "name": "timerDuration",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": ["set a {timerDuration} second timer"]
+        },
+        {
+          "name": "FeatureSwitchIntent",
+          "slots": [
+            {
+              "name": "feature",
+              "type": "Feature"
+            }
+          ],
+          "samples": ["turn on {feature}", "turn off {feature}"]
+        },
+        {
           "name": "APLTemplateIntent",
           "slots": [
             {
@@ -148,6 +168,7 @@
           ],
           "samples": [
             "give me a speechcon",
+            "give me a random speechcon",
             "pick a speechcon",
             "let me hear a speechcon",
             "say {speechcon}",
@@ -183,6 +204,18 @@
         }
       ],
       "types": [
+        {
+          "name": "Feature",
+          "values": [
+            {
+              "id": "APL",
+              "name": {
+                "value": "alexa presentation language",
+                "synonyms": ["a.p.l."]
+              }
+            }
+          ]
+        },
         {
           "name": "InfoType",
           "values": [
@@ -5728,7 +5761,6 @@
               "name": {
                 "value": "Account Linking",
                 "synonyms": [
-                  "account linking",
                   "oauth",
                   "oh auth",
                   "o auth",
@@ -5746,7 +5778,7 @@
               "id": "rec01XTdyovXobdwl",
               "name": {
                 "value": "Akersh Srivastava",
-                "synonyms": ["Akersh", "Srivastava"]
+                "synonyms": ["akersh", "srivastava"]
               }
             },
             {
@@ -5768,21 +5800,21 @@
               "id": "recntRCAhg7r3SWrV",
               "name": {
                 "value": "Amit Jotwani",
-                "synonyms": ["Amit", "Jotwani"]
+                "synonyms": ["amit", "jotwani"]
               }
             },
             {
               "id": "recjM2qcGzsF6hu8Y",
               "name": {
                 "value": "Andrea Muttoni",
-                "synonyms": ["Andrea", "Muttoni"]
+                "synonyms": ["andrea", "muttoni"]
               }
             },
             {
               "id": "recUyNLvUeTofk4Ss",
               "name": {
                 "value": "Anna Van Brookhoven",
-                "synonyms": ["Anna", "Van Brookhoven", "Brookhoven"]
+                "synonyms": ["anna", "van brookhoven", "brookhoven"]
               }
             },
             {
@@ -5816,17 +5848,20 @@
             },
             {
               "id": "recfrELJZLLixyxJW",
-              "name": { "value": "AWS", "synonyms": ["amazon web services"] }
+              "name": {
+                "value": "AWS",
+                "synonyms": ["amazon web services", "a.w.s."]
+              }
             },
             {
               "id": "recUjnvwvEuAPgbcp",
               "name": {
                 "value": "AWS Credits",
                 "synonyms": [
-                  "aws credits",
+                  "a.w.s. credits",
                   "reimbursement",
                   "hundred dollar credits",
-                  "aws reimbursement",
+                  "a.w.s. reimbursement",
                   "promotional credits"
                 ]
               }
@@ -5850,7 +5885,7 @@
             {
               "id": "recpewoOTRhGACKmD",
               "name": {
-                "value": "Carlos Ordonez",
+                "value": "Carlos Ordoñez",
                 "synonyms": ["Carlos", "Ordonez"]
               }
             },
@@ -5867,8 +5902,11 @@
               "name": { "value": "Cloudwatch", "synonyms": [] }
             },
             {
-              "id": "rec9AuQ8zxwRQx93j",
-              "name": { "value": "Consumables", "synonyms": [] }
+              "id": "recGxWEX2Sgbgmd3S",
+              "name": {
+                "value": "Confirm Intent",
+                "synonyms": ["intent confirmation"]
+              }
             },
             {
               "id": "recSwYao6JwVaOwvt",
@@ -5897,8 +5935,12 @@
               "id": "reco0BfWh9aHB9bbZ",
               "name": {
                 "value": "David Isbitski",
-                "synonyms": ["Dave", "David", "Isbitski"]
+                "synonyms": ["Dave", "David", "Isbitski", "Dave Isbitski"]
               }
+            },
+            {
+              "id": "recciSqnwLzoUiQW5",
+              "name": { "value": "Delegate Directive", "synonyms": [] }
             },
             {
               "id": "recbARhgdw5Cjqxsr",
@@ -5990,7 +6032,13 @@
               "id": "recnjqs0DKVLGEsqD",
               "name": {
                 "value": "In Skill Purchasing",
-                "synonyms": ["I.S.P.", "ISPs", "make money"]
+                "synonyms": [
+                  "I.S.P.",
+                  "ISPs",
+                  "make money",
+                  "sell items",
+                  "sell products"
+                ]
               }
             },
             {
@@ -6013,7 +6061,7 @@
               "id": "recPHhieVloNRSAcS",
               "name": {
                 "value": "Jeff Blankenburg",
-                "synonyms": ["jeff", "blankenburg"]
+                "synonyms": ["Jeff", "Blankenburg"]
               }
             },
             {
@@ -6035,23 +6083,16 @@
               "id": "recj0jikWrmTGnTZv",
               "name": {
                 "value": "Karthik Ragubathy",
-                "synonyms": ["Karthik", "Ragubathy"]
+                "synonyms": ["Karthik", "Ragubathy", "p karthik r"]
               }
             },
             {
               "id": "recmvbklNr9RRir8E",
-              "name": { "value": "Lambda", "synonyms": [] }
+              "name": { "value": "Lambda", "synonyms": ["serverless"] }
             },
             {
               "id": "reczEUklnYUFPFbKW",
               "name": { "value": "List Events", "synonyms": [] }
-            },
-            {
-              "id": "rec1COBOcnF4yVOPD",
-              "name": {
-                "value": "Mark Bartlett",
-                "synonyms": ["Mark", "Bartlett"]
-              }
             },
             {
               "id": "recqWOLu28YyTTQZA",
@@ -6063,7 +6104,10 @@
             },
             {
               "id": "recywCGM2IUHE1AhP",
-              "name": { "value": "Metrics Dashboard", "synonyms": [] }
+              "name": {
+                "value": "Metrics Dashboard",
+                "synonyms": ["analytics", "metrics", "user data"]
+              }
             },
             {
               "id": "recI7xTKidtw4ux2y",
@@ -6083,11 +6127,14 @@
             },
             {
               "id": "reclQDTjuFrO4r6hV",
-              "name": { "value": "Office Hours", "synonyms": [] }
-            },
-            {
-              "id": "recGkzQDXnKj1l3B3",
-              "name": { "value": "One-Time Purchases", "synonyms": [] }
+              "name": {
+                "value": "Office Hours",
+                "synonyms": [
+                  "q and a",
+                  "ask the experts",
+                  "developer office hours"
+                ]
+              }
             },
             {
               "id": "recQE5VKu9nbpnluH",
@@ -6095,11 +6142,24 @@
             },
             {
               "id": "recNYOnDcjHN7jF0W",
-              "name": { "value": "Persistence", "synonyms": [] }
+              "name": {
+                "value": "Persistence",
+                "synonyms": [
+                  "save data",
+                  "session data",
+                  "save session",
+                  "persist",
+                  "database",
+                  "dynamo db"
+                ]
+              }
             },
             {
               "id": "recCtzIEBFg9kknuC",
-              "name": { "value": "Phonemes", "synonyms": [] }
+              "name": {
+                "value": "Phonemes",
+                "synonyms": ["phonetic spelling", "phonetics"]
+              }
             },
             {
               "id": "recWsPiqD68mBfTPf",
@@ -6107,11 +6167,10 @@
             },
             {
               "id": "recJ2wY3mAVdnNLgG",
-              "name": { "value": "Polly Voices", "synonyms": [] }
-            },
-            {
-              "id": "recUkQw6ffVzLbfoK",
-              "name": { "value": "Premium Experiences", "synonyms": [] }
+              "name": {
+                "value": "Polly Voices",
+                "synonyms": ["other voices", "polly", "amazon polly"]
+              }
             },
             {
               "id": "reccx6BmwBfuCPz44",
@@ -6127,11 +6186,17 @@
             },
             {
               "id": "reck0cggOFz3GKa4i",
-              "name": { "value": "Slot Confirmation", "synonyms": [] }
+              "name": {
+                "value": "Slot Confirmation",
+                "synonyms": ["confirm slot"]
+              }
             },
             {
               "id": "recLHJu0DtdJICLhg",
-              "name": { "value": "Slot Elicitation", "synonyms": [] }
+              "name": {
+                "value": "Slot Elicitation",
+                "synonyms": ["elicit slot"]
+              }
             },
             {
               "id": "rec6z6M4x1ywlyoEh",
@@ -6151,7 +6216,10 @@
             },
             {
               "id": "recFq7Pa1dX8U99rH",
-              "name": { "value": "Speechcons", "synonyms": [] }
+              "name": {
+                "value": "Speechcons",
+                "synonyms": ["speechcon", "speech con"]
+              }
             },
             {
               "id": "recYds82pZzrqf3m5",
@@ -6170,12 +6238,8 @@
               "name": { "value": "State Management", "synonyms": [] }
             },
             {
-              "id": "recrGDoZTQsQPwFI5",
-              "name": { "value": "Subscriptions", "synonyms": [] }
-            },
-            {
               "id": "recbRzXOFIxzZJDKK",
-              "name": { "value": "Text Messaging", "synonyms": [] }
+              "name": { "value": "Text Messaging", "synonyms": ["sms", "sns"] }
             },
             {
               "id": "recceQ1mxsaNYGFI8",
@@ -6201,12 +6265,12 @@
               "name": { "value": "Voice Design", "synonyms": [] }
             },
             {
-              "id": "recFRkXsGakuygKWL",
-              "name": { "value": "Voice Design Education Team", "synonyms": [] }
-            },
-            {
               "id": "recuzKWcxGPfdB9cc",
               "name": { "value": "Webinars", "synonyms": [] }
+            },
+            {
+              "id": "rec7JXZVhsXNJ4gAo",
+              "name": { "value": "Whisper Mode", "synonyms": ["whisper"] }
             }
           ]
         },

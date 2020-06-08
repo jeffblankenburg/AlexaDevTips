@@ -13,7 +13,7 @@ async function SoundEffectIntent(handlerInput) {
   if (resolvedWords != undefined) {
     const randomEffect = helper.getRandomItem(resolvedWords);
     soundEffect = await airtable.getItemByRecordId(
-      process.env.airtable_base_data,
+      process.env.airtable_base_soundeffect,
       "SoundEffect",
       randomEffect.value.id
     );

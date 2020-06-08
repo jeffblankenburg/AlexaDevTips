@@ -47,7 +47,7 @@ const ChangeVoiceIntentHandler = {
     );
   },
   async handle(handlerInput) {
-    return handlers.changeVoiceIntent(handlerInput);
+    return handlers.ChangeVoiceIntent(handlerInput);
   },
 };
 

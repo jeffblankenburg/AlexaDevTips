@@ -37,6 +37,9 @@ async function APLTemplateIntent(handlerInput) {
     speakOutput = `I'm sorry, your device does not support APL. `;
   }
 
+  const achSpeech = await airtable.checkForAchievement(handlerInput, "APL");
+  speakOutput = `${achSpeech} ${speakOutput}`;
+
   return handlerInput.responseBuilder
     .speak(helper.changeVoice(`${speakOutput} ${actionQuery}`, handlerInput))
     .reprompt(helper.changeVoice(actionQuery, handlerInput))

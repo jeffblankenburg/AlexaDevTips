@@ -6,7 +6,7 @@ async function getRandomSoundEffect() {
   const random = helper.getRandomTwoCharacterString();
 
   const url = `https://api.airtable.com/v0/${process.env.airtable_base_soundeffect}/SoundEffect?api_key=${process.env.airtable_api_key}&filterByFormula=AND(IsDisabled%3DFALSE(),FIND(%22${random}%22%2C+RecordId)!%3D0)`;
-  console.log(`FULL PATH = ${url}`);
+  //console.log(`FULL PATH = ${url}`);
   const options = {
     method: "GET",
   };

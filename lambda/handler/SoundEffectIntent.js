@@ -12,6 +12,7 @@ async function SoundEffectIntent(handlerInput) {
   let soundEffect = "";
   if (resolvedWords != undefined) {
     const randomEffect = helper.getRandomItem(resolvedWords);
+    console.log(`RANDOM EFFECT ${JSON.stringify(randomEffect)}`);
     soundEffect = await airtable.getItemByRecordId(
       process.env.airtable_base_soundeffect,
       "SoundEffect",
@@ -20,13 +21,16 @@ async function SoundEffectIntent(handlerInput) {
   } else {
     soundEffect = await airtable.getRandomSoundEffect();
   }
-
-  speakOutput = `This sound effect is called ${soundEffect.fields.Name.split(
+  console.log(`SOUND EFFECT ${JSON.stringify(soundEffect)}`);
+  let speakOutput = `This sound effect is called ${soundEffect.fields.Name.split(
     "_"
   ).join(" ")}. ${helper.wrapSoundEffect(
     soundEffect.fields.Category,
     soundEffect.fields.Name
   )}`;
+
+  const achSpeech = await airtable.checkForAchievement(handlerInput, "EFFECT");
+  speakOutput = `${achSpeech} ${speakOutput}`;
 
   return handlerInput.responseBuilder
     .speak(helper.changeVoice(speakOutput + " " + actionQuery, handlerInput))

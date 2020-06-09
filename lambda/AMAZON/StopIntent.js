@@ -6,7 +6,14 @@ async function StopIntent(handlerInput) {
   helper.setAction(handlerInput, "STOPINTENT");
   const locale = helper.getLocale(handlerInput);
 
-  const speakOutput = await airtable.getRandomSpeech("Goodbye", locale);
+  let speakOutput = `${achievementSpeech} ${await airtable.getRandomSpeech(
+    "Goodbye",
+    locale
+  )}`;
+
+  const achSpeech = await airtable.checkForAchievement(handlerInput, "STOP");
+  speakOutput = `${achSpeech} ${speakOutput}`;
+
   return handlerInput.responseBuilder
     .speak(helper.changeVoice(`${speakOutput}`, handlerInput))
     .getResponse();

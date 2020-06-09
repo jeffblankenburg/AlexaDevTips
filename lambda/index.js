@@ -1,5 +1,7 @@
 //TODO: WRITE CARDS FOR LITERALLY EVERYTHING.
 //TODO: GET ALL OF THE SPEECH CONTENT INTO THE DATABASE!!
+//TODO: WE SHOULD ADD THE ACHIEVEMENT UNLOCKED FEATURES TO THIS.
+//TODO: LEADERBOARD INTENT.  LET PEOPLE KNOW THEIR SCORE VS. EVERYONE ELSE.
 
 const Alexa = require("ask-sdk-core");
 const airtable = require("./airtable");
@@ -7,38 +9,54 @@ const helper = require("./helper.js");
 const handlers = require("./handler");
 const AMAZON = require("./AMAZON");
 
-const LaunchRequestHandler = {
-  canHandle(handlerInput) {
-    return (
-      Alexa.getRequestType(handlerInput.requestEnvelope) === "LaunchRequest"
-    );
-  },
-  handle(handlerInput) {
-    return handlers.LaunchRequest(handlerInput);
-  },
-};
-
-const SpeechconIntentHandler = {
+const AchievementIntentHandler = {
   canHandle(handlerInput) {
     return (
       Alexa.getRequestType(handlerInput.requestEnvelope) === "IntentRequest" &&
-      Alexa.getIntentName(handlerInput.requestEnvelope) === "SpeechconIntent"
+      Alexa.getIntentName(handlerInput.requestEnvelope) === "AchievementIntent"
     );
   },
   async handle(handlerInput) {
-    return await handlers.SpeechconIntent(handlerInput);
+    return handlers.AchievementIntent(handlerInput);
   },
 };
 
-const SoundEffectIntentHandler = {
+const AnswerIntentHandler = {
   canHandle(handlerInput) {
     return (
       Alexa.getRequestType(handlerInput.requestEnvelope) === "IntentRequest" &&
-      Alexa.getIntentName(handlerInput.requestEnvelope) === "SoundEffectIntent"
+      Alexa.getIntentName(handlerInput.requestEnvelope) === "AnswerIntent"
     );
   },
   async handle(handlerInput) {
-    return await handlers.SoundEffectIntent(handlerInput);
+    return handlers.AnswerIntent(handlerInput);
+  },
+};
+
+const APLTemplateIntentHandler = {
+  canHandle(handlerInput) {
+    return (
+      Alexa.getRequestType(handlerInput.requestEnvelope) === "IntentRequest" &&
+      Alexa.getIntentName(handlerInput.requestEnvelope) === "APLTemplateIntent"
+    );
+  },
+  async handle(handlerInput) {
+    return handlers.APLTemplateIntent(handlerInput);
+  },
+};
+
+const CancelAndStopIntentHandler = {
+  canHandle(handlerInput) {
+    return (
+      Alexa.getRequestType(handlerInput.requestEnvelope) === "IntentRequest" &&
+      (Alexa.getIntentName(handlerInput.requestEnvelope) ===
+        "AMAZON.CancelIntent" ||
+        Alexa.getIntentName(handlerInput.requestEnvelope) ===
+          "AMAZON.StopIntent")
+    );
+  },
+  async handle(handlerInput) {
+    return AMAZON.StopIntent(handlerInput);
   },
 };
 
@@ -66,15 +84,14 @@ const HelpIntentHandler = {
   },
 };
 
-const AnswerIntentHandler = {
+const LaunchRequestHandler = {
   canHandle(handlerInput) {
     return (
-      Alexa.getRequestType(handlerInput.requestEnvelope) === "IntentRequest" &&
-      Alexa.getIntentName(handlerInput.requestEnvelope) === "AnswerIntent"
+      Alexa.getRequestType(handlerInput.requestEnvelope) === "LaunchRequest"
     );
   },
-  async handle(handlerInput) {
-    return handlers.AnswerIntent(handlerInput);
+  handle(handlerInput) {
+    return handlers.LaunchRequest(handlerInput);
   },
 };
 
@@ -90,15 +107,15 @@ const PersonalInfoIntentHandler = {
   },
 };
 
-const APLTemplateIntentHandler = {
+const SpeechconIntentHandler = {
   canHandle(handlerInput) {
     return (
       Alexa.getRequestType(handlerInput.requestEnvelope) === "IntentRequest" &&
-      Alexa.getIntentName(handlerInput.requestEnvelope) === "APLTemplateIntent"
+      Alexa.getIntentName(handlerInput.requestEnvelope) === "SpeechconIntent"
     );
   },
   async handle(handlerInput) {
-    return handlers.APLTemplateIntent(handlerInput);
+    return await handlers.SpeechconIntent(handlerInput);
   },
 };
 
@@ -115,18 +132,15 @@ const RepeatIntentHandler = {
   },
 };
 
-const CancelAndStopIntentHandler = {
+const SoundEffectIntentHandler = {
   canHandle(handlerInput) {
     return (
       Alexa.getRequestType(handlerInput.requestEnvelope) === "IntentRequest" &&
-      (Alexa.getIntentName(handlerInput.requestEnvelope) ===
-        "AMAZON.CancelIntent" ||
-        Alexa.getIntentName(handlerInput.requestEnvelope) ===
-          "AMAZON.StopIntent")
+      Alexa.getIntentName(handlerInput.requestEnvelope) === "SoundEffectIntent"
     );
   },
   async handle(handlerInput) {
-    return AMAZON.StopIntent(handlerInput);
+    return await handlers.SoundEffectIntent(handlerInput);
   },
 };
 
@@ -195,6 +209,7 @@ exports.handler = Alexa.SkillBuilders.custom()
     LaunchRequestHandler,
     AnswerIntentHandler,
     APLTemplateIntentHandler,
+    AchievementIntentHandler,
     PersonalInfoIntentHandler,
     SpeechconIntentHandler,
     SoundEffectIntentHandler,

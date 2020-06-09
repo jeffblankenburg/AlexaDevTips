@@ -26,8 +26,10 @@ async function AnswerIntent(handlerInput) {
       "LINK",
       helper.convertLinkToSpeech(answer.fields.Link)
     )}`;
-    if (answer.fields.CardResponse)
-      rb.withSimpleCard(answer.fields.Name, answer.fields.CardResponse);
+    if (answer.fields.CardResponse) {
+      const cardResponse = `${answer.fields.CardResponse}\n${answer.fields.LinkPrefix} ${answer.fields.Link}`;
+      rb.withSimpleCard(answer.fields.Name, cardResponse);
+    }
     airtable.updateUserAnswers(handlerInput, resolvedWords[0].value.id);
   } else if (resolvedWords && resolvedWords.length > 1) {
     helper.setAction(handlerInput, "ANSWERINTENT - DISAMBIGUATION");
@@ -44,12 +46,17 @@ async function AnswerIntent(handlerInput) {
       speakOutput = `I don't have a record for ${spokenWords}.  My apologies.  I'll do some research. Instead, `;
     }
     const answer = await airtable.getRandomUnusedAnswer(handlerInput);
-    if (answer.fields.CardResponse)
-      rb.withSimpleCard(answer.fields.Name, answer.fields.CardResponse);
+    if (answer.fields.CardResponse) {
+      const cardResponse = `${answer.fields.CardResponse}\n${answer.fields.LinkPrefix} ${answer.fields.Link}`;
+      rb.withSimpleCard(answer.fields.Name, cardResponse);
+    }
     let name = answer.fields.Name;
     if (answer.fields.Pronunciation) name = answer.fields.Pronunciation;
     speakOutput += `I picked a random topic for you: ${name}. ${answer.fields.VoiceResponse} `;
   }
+
+  const achSpeech = await airtable.checkForAchievement(handlerInput, "ANSWER");
+  speakOutput = `${achSpeech} ${speakOutput}`;
 
   return rb
     .speak(helper.changeVoice(`${speakOutput} ${actionQuery}`, handlerInput))

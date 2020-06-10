@@ -15,6 +15,8 @@ function getUserRecord(handlerInput) {
     method: "GET",
   };
 
+  //TODO: IF THE USER IS BEING CREATED, MAKE A FLAG TO INDICATE THIS IS THE FIRST TIME USING THE SKILL.
+
   return fetch(url, options)
     .then((res) => res.json())
     .then((r) => {

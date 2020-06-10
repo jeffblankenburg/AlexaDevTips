@@ -9,6 +9,7 @@ async function AnswerIntent(handlerInput) {
   const resolvedWords = helper.getResolvedWords(handlerInput, "answer");
   let speakOutput = "";
   let actionQuery = await airtable.getRandomSpeech("ActionQuery", locale);
+  let rb = handlerInput.responseBuilder;
 
   if (resolvedWords && resolvedWords.length === 1) {
     const answer = await airtable.getItemByRecordId(
@@ -16,31 +17,69 @@ async function AnswerIntent(handlerInput) {
       "Answer",
       resolvedWords[0].value.id
     );
-    let name = answer.fields.name;
+    let name = answer.fields.Name;
     if (answer.fields.Pronunciation) name = answer.fields.Pronunciation;
-    speakOutput = `You asked me about ${name}. ${answer.fields.VoiceResponse}`;
+    const answerConfirmation = await airtable.getRandomSpeech(
+      "AnswerConfirmation",
+      locale
+    );
+    speakOutput = `${answerConfirmation.replace("ANSWER", name)} ${
+      answer.fields.VoiceResponse
+    }`;
+    if (answer.fields.Link) {
+      const linkIntro = await airtable.getRandomSpeech(
+        "AnswerLinkIntro",
+        locale
+      );
+      linkIntro.replace("LINK", helper.convertLinkToSpeech(answer.fields.Link));
+    }
+    if (answer.fields.CardResponse) {
+      const cardResponse = `${answer.fields.CardResponse}\n${answer.fields.LinkPrefix} ${answer.fields.Link}`;
+      rb.withSimpleCard(answer.fields.Name, cardResponse);
+    }
     airtable.updateUserAnswers(handlerInput, resolvedWords[0].value.id);
   } else if (resolvedWords && resolvedWords.length > 1) {
     helper.setAction(handlerInput, "ANSWERINTENT - DISAMBIGUATION");
+    const disambiguation = await airtable.getRandomSpeech(
+      "AnswerDisambiguation",
+      locale
+    );
     actionQuery = "";
-    speakOutput = `I found ${
-      resolvedWords.length
-    } matches for ${spokenWords}.  Did you mean ${await helper.getDisambiguationString(
-      resolvedWords
-    )}?`;
+    speakOutput = disambiguation
+      .replace("COUNT", resolvedWords.length)
+      .replace("SPOKENWORDS", spokenWords)
+      .replace(
+        "RESOLVEDLIST",
+        await helper.getDisambiguationString(resolvedWords)
+      );
   } else {
     //TODO: WHAT DO WE DO IF THEY HAVE HEARD ALL THE THINGS?
-    //TODO: IF THEY SAID SOMETHING THAT DIDN'T MATCH, WE SHOULD LOG IT SO THAT WE CAN ADD IT.
     if (spokenWords) {
       airtable.saveMissedValue(spokenWords, "MissedAnswer");
-      speakOutput = `I don't have a record for ${spokenWords}.  My apologies.  I'll do some research. Instead, `;
+      const answerApology = await airtable.getRandomSpeech(
+        "AnswerApology",
+        locale
+      );
+      speakOutput = `${answerApology.replace("SPOKENWORDS", spokenWords)} `;
     }
     const answer = await airtable.getRandomUnusedAnswer(handlerInput);
-    console.log(`ANSWER = ${JSON.stringify(answer)}`);
-    speakOutput += `I picked a random topic for you: ${answer.fields.Name}. ${answer.fields.VoiceResponse} `;
+    airtable.updateUserAnswers(handlerInput, answer.fields.RecordId);
+    if (answer.fields.CardResponse) {
+      const cardResponse = `${answer.fields.CardResponse}\n${answer.fields.LinkPrefix} ${answer.fields.Link}`;
+      rb.withSimpleCard(answer.fields.Name, cardResponse);
+    }
+    let name = answer.fields.Name;
+    if (answer.fields.Pronunciation) name = answer.fields.Pronunciation;
+    const randomAnswer = await airtable.getRandomSpeech("AnswerRandom", locale);
+    speakOutput += `${randomAnswer.replace("NAME", name)} ${
+      answer.fields.VoiceResponse
+    } `;
   }
 
-  return handlerInput.responseBuilder
+  const achSpeech = await airtable.checkForAchievement(handlerInput, "ANSWER");
+  speakOutput = `${achSpeech} ${speakOutput}`;
+
+  return rb
     .speak(helper.changeVoice(`${speakOutput} ${actionQuery}`, handlerInput))
     .reprompt(helper.changeVoice(actionQuery, handlerInput))
     .getResponse();

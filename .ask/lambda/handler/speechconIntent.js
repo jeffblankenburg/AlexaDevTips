@@ -28,6 +28,12 @@ async function SpeechconIntent(handlerInput) {
       )}`;
   }
 
+  const achSpeech = await airtable.checkForAchievement(
+    handlerInput,
+    "SPEECHCON"
+  );
+  speakOutput = `${achSpeech} ${speakOutput}`;
+
   return handlerInput.responseBuilder
     .speak(helper.changeVoice(speakOutput + " " + actionQuery, handlerInput))
     .reprompt(helper.changeVoice(actionQuery, handlerInput))

@@ -6,8 +6,14 @@ async function HelpIntent(handlerInput) {
   helper.setAction(handlerInput, "HELPINTENT");
   const locale = helper.getLocale(handlerInput);
 
-  const speakOutput = await airtable.getRandomSpeech("Help", locale);
-  const actionQuery = await airtable.getRandomSpeech("ActionQuery", locale);
+  let [speakOutput, actionQuery] = await Promise.all([
+    await airtable.getRandomSpeech("Help", locale),
+    await airtable.getRandomSpeech("ActionQuery", locale),
+  ]);
+
+  const achSpeech = await airtable.checkForAchievement(handlerInput, "HELP");
+  speakOutput = `${achSpeech} ${speakOutput}`;
+
   return handlerInput.responseBuilder
     .speak(helper.changeVoice(speakOutput + " " + actionQuery, handlerInput))
     .reprompt(helper.changeVoice(actionQuery, handlerInput))

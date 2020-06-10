@@ -3,9 +3,7 @@ const Airtable = require("airtable");
 async function updateUserPollyVoice(handlerInput, pollyVoice) {
   console.log(`<=== airtable/updateUserPollyVoice.js ===>`);
   const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-  console.log("POLLY VOICE = '" + pollyVoice + "'");
   if (pollyVoice === "Alexa") pollyVoice = "";
-  console.log("POLLY VOICE = '" + pollyVoice + "'");
   var airtable = new Airtable({ apiKey: process.env.airtable_api_key }).base(
     process.env.airtable_base_data
   );

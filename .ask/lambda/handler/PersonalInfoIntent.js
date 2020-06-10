@@ -122,6 +122,9 @@ async function PersonalInfoIntent(handlerInput) {
 
   const actionQuery = await airtable.getRandomSpeech("ActionQuery", locale);
 
+  const achSpeech = await airtable.checkForAchievement(handlerInput, "INFO");
+  speakOutput = `${achSpeech} ${speakOutput}`;
+
   return handlerInput.responseBuilder
     .speak(helper.changeVoice(`${speakOutput} ${actionQuery}`, handlerInput))
     .reprompt(helper.changeVoice(actionQuery, handlerInput))

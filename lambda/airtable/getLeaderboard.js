@@ -12,21 +12,7 @@ function getLeaderboard(recordId) {
     .then((res) => res.json())
     .then((r) => {
       return r.records;
-      // r.records.find(function (item, i) {
-      //   const total = r.records.length;
-      //   if (item.fields.RecordId === recordId) {
-      //     console.log(`POSITION ${i + 1}`);
-      //     return `You have completed ${r.records[i].fields.Score} achievements, and you are in <say-as interpret-as="ordinal">${i+1}</say-as> place out of ${total}.`;
-      //   }
-      // });
     });
 }
 
 module.exports = getLeaderboard;
-
-// var filteredObj = data.find(function(item, i){
-//   if(item.name === val){
-//     index = i;
-//     return i;
-//   }
-//});

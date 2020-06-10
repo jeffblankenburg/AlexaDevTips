@@ -1,3 +1,4 @@
+const AchievementIntent = require("./AchievementIntent");
 const AnswerIntent = require("./AnswerIntent");
 const APLTemplateIntent = require("./APLTemplateIntent");
 const ChangeVoiceIntent = require("./ChangeVoiceIntent");
@@ -9,6 +10,7 @@ const error = require("./error");
 const intentReflector = require("./intentReflector");
 
 module.exports = {
+  AchievementIntent,
   AnswerIntent,
   APLTemplateIntent,
   ChangeVoiceIntent,

@@ -66,6 +66,15 @@ async function getDisambiguationString(values) {
   return string;
 }
 
+function convertLinkToSpeech(link) {
+  let speech = link.replace("http://", "").replace("https://");
+  // speech = speech.split(".").join(" dot ");
+  // speech = speech.split("/").join(" slash ");
+  speech = speech.replace(/\./g, " dot ");
+  speech = speech.replace(/\//g, " slash ");
+  return speech;
+}
+
 function supportsAPL(handlerInput) {
   if (
     handlerInput &&
@@ -124,7 +133,6 @@ function getRandomTwoCharacterString() {
   const alphabet = [
     "a",
     "b",
-    "c",
     "d",
     "f",
     "g",
@@ -197,6 +205,7 @@ function isGeolocationSupported(handlerInput) {
 }
 
 module.exports = {
+  convertLinkToSpeech,
   getSpokenWords,
   getResolvedWords,
   getDisambiguationString,

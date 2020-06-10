@@ -16,8 +16,6 @@ async function checkForAchievement(handlerInput, code) {
   return fetch(url, options)
     .then((res) => res.json())
     .then((r) => {
-      //TODO: DO STUFF HERE.
-      console.log(`R ${JSON.stringify(r)}`);
       if (r.records.length > 0) {
         const achievement = r.records[0];
         if (

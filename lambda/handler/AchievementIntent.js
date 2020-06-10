@@ -8,21 +8,37 @@ async function AchievementIntent(handlerInput) {
   const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
   const userRecordId = sessionAttributes.user.RecordId;
 
+  const achSpeech = await airtable.checkForAchievement(
+    handlerInput,
+    "LEADERBOARD"
+  );
+
   //TODO: IF THIS A USER'S FIRST TIME, GIVE THEM MORE BACKGROUND INFORMATION ABOUT WHAT IS POSSIBLE.
-  const [leaderboard, actionQuery] = await Promise.all([
+  const [
+    achievementCount,
+    leaderboard,
+    leaderboardSpeech,
+    actionQuery,
+  ] = await Promise.all([
+    airtable.getAchievementCount(handlerInput),
     airtable.getLeaderboard(userRecordId),
+    airtable.getRandomSpeech("Leaderboard", locale),
     airtable.getRandomSpeech("ActionQuery", locale),
   ]);
 
   const total = leaderboard.length;
-  const position = leaderboard.findIndex(
+  const place = leaderboard.findIndex(
     (obj) => obj.fields.RecordId == userRecordId
   );
-  const score = leaderboard[position].fields.Score + 1;
+  const score = leaderboard[place].fields.Score;
 
-  const speakOutput = `You have completed ${score} achievements, and you are in <say-as interpret-as="ordinal">${
-    position + 1
-  }</say-as> place out of ${total}.`;
+  let speakOutput = leaderboardSpeech
+    .replace("SCORE", score)
+    .replace("COUNT", achievementCount)
+    .replace("PLACE", place + 1)
+    .replace("TOTAL", total);
+
+  speakOutput = `${achSpeech} ${speakOutput}`;
 
   return handlerInput.responseBuilder
     .speak(helper.changeVoice(`${speakOutput} ${actionQuery}`, handlerInput))

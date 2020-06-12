@@ -11,18 +11,20 @@ async function ChangeVoiceIntent(handlerInput) {
   let achSpeech = "";
   let speakOutput = "";
   if (resolvedWords != undefined) {
-    await airtable.updateUserPollyVoice(
-      handlerInput,
-      resolvedWords[0].value.name
-    );
-    speakOutput = `I am now using the voice of ${resolvedWords[0].value.name}. `;
     achSpeech = await airtable.checkForAchievement(
       handlerInput,
       `VOICE${resolvedWords[0].value.name.toUpperCase()}`
     );
+    const voiceSpeech = await airtable.getRandomSpeech("NewVoice", locale);
+    speakOutput = voiceSpeech.replace("VOICENAME", resolvedWords[0].value.name);
+    await airtable.updateUserPollyVoice(
+      handlerInput,
+      resolvedWords[0].value.name
+    );
   } else {
-    //CHANGE THE USER'S POLLYVOICE TO A RANDOM VOICE.  LET THEM KNOW TO CHANGE IT BACK TO ALEXA, THEY WILL NEED TO SAY SOMETHING WE HAVEN'T DECIDED YET.
-    speakOutput = `${spokenWords} is not the name of a Polly voice. `;
+    //CHANGE THE USER'S POLLY VOICE TO A RANDOM VOICE.  LET THEM KNOW TO CHANGE IT BACK TO ALEXA, THEY WILL NEED TO SAY SOMETHING WE HAVEN'T DECIDED YET.
+    const voiceSpeech = await airtable.getRandomSpeech("NotVoice", locale);
+    speakOutput = voiceSpeech.replace("VOICENAME", spokenWords);
   }
 
   var actionQuery = await airtable.getRandomSpeech(`ActionQuery`, locale);

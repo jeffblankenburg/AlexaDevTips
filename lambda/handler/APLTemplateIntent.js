@@ -12,7 +12,14 @@ async function APLTemplateIntent(handlerInput) {
 
   if (helper.supportsAPL(handlerInput)) {
     if (resolvedWords && resolvedWords.length === 1) {
-      speakOutput = `The ${resolvedWords[0].value.name} template is displayed on your screen.`;
+      const templateSpeech = await airtable.getRandomSpeech(
+        "APLTemplate",
+        locale
+      );
+      speakOutput = templateSpeech.replace(
+        "TEMPLATENAME",
+        resolvedWords[0].value.name
+      );
       const apl = require(`../apltemplates/${resolvedWords[0].value.id}.json`);
       handlerInput.responseBuilder.addDirective({
         type: "Alexa.Presentation.APL.RenderDocument",
@@ -22,19 +29,26 @@ async function APLTemplateIntent(handlerInput) {
         datasources: apl.datasources,
       });
     } else if (resolvedWords && resolvedWords.length > 1) {
-      speakOutput = `I found ${
-        resolvedWords.length
-      } matches for ${spokenWords}.  Did you mean ${helper.getDisambiguationString(
-        resolvedWords
-      )}?`;
+      const disambiguation = await airtable.getRandomSpeech(
+        "Disambiguation",
+        locale
+      );
+      actionQuery = "";
+      speakOutput = disambiguation
+        .replace("COUNT", resolvedWords.length)
+        .replace("SPOKENWORDS", spokenWords)
+        .replace(
+          "RESOLVEDLIST",
+          await helper.getDisambiguationString(resolvedWords)
+        );
     } else {
       //TODO: SHOW A LIST OF APL TEMPLATES WHEN ONE ISN'T INDICATED.
-      const answer = await airtable.getRandomUnusedAnswer(handlerInput);
-      console.log(`ANSWER = ${JSON.stringify(answer)}`);
-      speakOutput = `I picked a random topic for you: ${answer.fields.Name}. ${answer.fields.VoiceResponse} `;
+      speakOutput =
+        "I should be showing you a list of APL templates, but that hasn't been built yet.";
     }
   } else {
-    speakOutput = `I'm sorry, your device does not support APL. `;
+    const notSupported = await airtable.getRandomSpeech("NotSupported", locale);
+    speakOutput = notsupported.replace("THING", "APL");
   }
 
   const achSpeech = await airtable.checkForAchievement(handlerInput, "APL");

@@ -41,7 +41,7 @@ async function AnswerIntent(handlerInput) {
   } else if (resolvedWords && resolvedWords.length > 1) {
     helper.setAction(handlerInput, "ANSWERINTENT - DISAMBIGUATION");
     const disambiguation = await airtable.getRandomSpeech(
-      "AnswerDisambiguation",
+      "Disambiguation",
       locale
     );
     actionQuery = "";

@@ -4,51 +4,31 @@
       "locales": {
         "en-US": {
           "summary": "Sample Short Description",
-          "examplePhrases": [
-            "Alexa open hello world",
-            "hello",
-            "help"
-          ],
+          "examplePhrases": ["Alexa open hello world", "hello", "help"],
           "name": "AlexaDevTips",
           "description": "Sample Full Description"
         },
         "en-IN": {
           "summary": "Sample Short Description",
-          "examplePhrases": [
-            "Alexa open hello world",
-            "hello",
-            "help"
-          ],
+          "examplePhrases": ["Alexa open hello world", "hello", "help"],
           "name": "AlexaDevTips",
           "description": "Sample Full Description"
         },
         "en-GB": {
           "summary": "Sample Short Description",
-          "examplePhrases": [
-            "Alexa open hello world",
-            "hello",
-            "help"
-          ],
+          "examplePhrases": ["Alexa open hello world", "hello", "help"],
           "name": "AlexaDevTips",
           "description": "Sample Full Description"
         },
         "en-CA": {
           "summary": "Sample Short Description",
-          "examplePhrases": [
-            "Alexa open hello world",
-            "hello",
-            "help"
-          ],
+          "examplePhrases": ["Alexa open hello world", "hello", "help"],
           "name": "AlexaDevTips",
           "description": "Sample Full Description"
         },
         "en-AU": {
           "summary": "Sample Short Description",
-          "examplePhrases": [
-            "Alexa open hello world",
-            "hello",
-            "help"
-          ],
+          "examplePhrases": ["Alexa open hello world", "hello", "help"],
           "name": "AlexaDevTips",
           "description": "Sample Full Description"
         }
@@ -72,6 +52,9 @@
     },
     "manifestVersion": "1.0",
     "permissions": [
+      {
+        "name": "alexa::devices:all:address:full:read"
+      },
       {
         "name": "alexa::devices:all:address:full:read"
       },

@@ -21,15 +21,24 @@ async function SoundEffectIntent(handlerInput) {
   } else {
     soundEffect = await airtable.getRandomSoundEffect();
   }
-  console.log(`SOUND EFFECT ${JSON.stringify(soundEffect)}`);
-  let speakOutput = `This sound effect is called ${soundEffect.fields.Name.split(
-    "_"
-  ).join(" ")}. ${helper.wrapSoundEffect(
-    soundEffect.fields.Category,
-    soundEffect.fields.Name
-  )}`;
+  const soundEffectSpeech = await airtable.getRandomSpeech(
+    "SOUNDEFFECT",
+    locale
+  );
+  let speakOutput = soundEffectSpeech
+    .replace("NAME", soundEffect.fields.Name.split("_").join(" "))
+    .replace(
+      "SOUNDEFFECT",
+      helper.wrapSoundEffect(
+        soundEffect.fields.Category,
+        soundEffect.fields.Name
+      )
+    );
 
-  const achSpeech = await airtable.checkForAchievement(handlerInput, "EFFECT");
+  const [achSpeech, cardText] = await Promise.all([
+    airtable.checkForAchievement(handlerInput, "EFFECT"),
+    airtable.getRandomSpeech("SSMLCARD", locale),
+  ]);
   speakOutput = `${achSpeech} ${speakOutput}`;
 
   return handlerInput.responseBuilder
@@ -38,10 +47,15 @@ async function SoundEffectIntent(handlerInput) {
     .withSimpleCard()
     .withSimpleCard(
       soundEffect.Name,
-      `You can use this sound effect in your skill with the following SSML syntax:\n\n${helper.wrapSoundEffect(
-        soundEffect.fields.Category,
-        soundEffect.fields.Name
-      )}`
+      `${cardText
+        .replace("TYPE", "sound effect")
+        .replace(
+          "SYNTAX",
+          helper.wrapSoundEffect(
+            soundEffect.fields.Category,
+            soundEffect.fields.Name
+          )
+        )}`
     )
     .getResponse();
 }

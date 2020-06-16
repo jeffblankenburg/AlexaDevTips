@@ -3,10 +3,13 @@ const Airtable = require("airtable");
 async function updateUserPollyVoice(handlerInput, pollyVoice) {
   console.log(`<=== airtable/updateUserPollyVoice.js ===>`);
   const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-  if (pollyVoice === "Alexa") pollyVoice = "";
+  console.log(`POLLY VOICE ${JSON.stringify(pollyVoice)}`);
+  if (pollyVoice.name === "Alexa") pollyVoice = "";
+  else pollyVoice = [pollyVoice.id];
   var airtable = new Airtable({ apiKey: process.env.airtable_api_key }).base(
     process.env.airtable_base_data
   );
+
   var record = await new Promise((resolve, reject) => {
     airtable("User").update(
       sessionAttributes.user.RecordId,

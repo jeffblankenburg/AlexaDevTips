@@ -8,7 +8,7 @@ async function checkForAchievement(handlerInput, code) {
   const locale = helper.getLocale(handlerInput);
   const userRecordId = sessionAttributes.user.RecordId;
   const url = `https://api.airtable.com/v0/${process.env.airtable_base_data}/Achievement?api_key=${process.env.airtable_api_key}&filterByFormula=AND(IsDisabled%3DFALSE(),Code="${code}",FIND(%22${locale}%22%2C+Locale)!%3D0)`;
-  console.log(`FULL PATH ${url}`);
+  //console.log(`FULL PATH ${url}`);
   const options = {
     method: "GET",
   };
@@ -27,7 +27,8 @@ async function checkForAchievement(handlerInput, code) {
             userRecordId,
             achievement.fields.RecordId
           );
-          return `<audio src="soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_01"/> Achievement Unlocked! ${achievement.fields.Description}`;
+          const achievementSound = await airtable.getRandomSpeech("ACHIEVEMENTUNLOCKED");
+          return `${achievementSound} ${achievement.fields.Description}`;
         }
       }
 

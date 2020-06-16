@@ -15,18 +15,23 @@ async function PersonalInfoIntent(handlerInput) {
     switch (resolvedWords[0].value.id) {
       case "email_address":
         let email = await profile.getEmail(handlerInput);
-        if (email)
-          speakOutput = `Your profile email address is ${email}.  You can set your email in your Amazon account, under log-in and security.`;
-        else
+        if (email) {
+          const emailSpeech = await airtable.getRandomSpeech(
+            "PROFILEMAIL",
+            locale
+          );
+          speakOutput = emailSpeech.replace("EMAIL", email);
+        } else
           return profile.sendPermissionsCard(handlerInput, "email address", [
             "alexa::profile:email:read",
           ]);
         break;
       case "full_name":
         let name = await profile.getName(handlerInput);
-        if (name)
-          speakOutput = `Your name is ${name}. You can set your name in the Alexa app, under calling and messaging, or you can set it in your Amazon account, under log-in and security.`;
-        else
+        if (name) {
+          nameSpeech = await airtable.getRandomSpeech("PROFILENAME", locale);
+          speakOutput = nameSpeech.replace("NAME", name);
+        } else
           return profile.sendPermissionsCard(handlerInput, "name", [
             "alexa::profile:name:read",
           ]);
@@ -49,15 +54,21 @@ async function PersonalInfoIntent(handlerInput) {
       case "device_address":
         let deviceAddress = await profile.getDeviceAddress(handlerInput);
         if (deviceAddress) {
-          // const speech = await airtable.getRandomSpeech(
-          //   "ProfileDeviceAddress",
-          //   locale
-          // );
+          const addressSpeech = await airtable.getRandomSpeech(
+            "PROFILEADDRESS",
+            locale
+          );
           //TODO: Don't talk about values that are null.
-          const speech = `Your complete device address is<break time='.5s'/>Address Line 1: <say-as interpret-as="address">${deviceAddress.addressLine1}</say-as><break time='.5s'/>Address Line 2: <say-as interpret-as="address">${deviceAddress.addressLine2}</say-as><break time='.5s'/>Address Line 3: <say-as interpret-as="address">${deviceAddress.addressLine3}</say-as><break time='.5s'/>City: ${deviceAddress.city}<break time='.5s'/>State or Region: <say-as interpret-as="spell-out">${deviceAddress.stateOrRegion}</say-as><break time='.5s'/>District or County: ${deviceAddress.districtOrCounty}<break time='.5s'/>Country Code: ${deviceAddress.countryCode}<break time='.5s'/>Postal Code: <say-as interpret-as="spell-out">${deviceAddress.postalCode}</say-as> `;
-          speakOutput = speech
-            .replace("COUNTRYCODE", deviceAddress.addressLine1)
-            .replace("PHONENUMBER", deviceAddress.postalCode);
+          speakOutput = addressSpeech
+            .replace("ADDRESSLINE1", deviceAddress.addressLine1)
+            .replace("ADDRESSLINE2", deviceAddress.addressLine2)
+            .replace("ADDRESSLINE3", deviceAddress.addressLine3)
+            .replace("CITY", deviceAddress.city)
+            //TODO: WE NEED A LOOKUP SERVICE THAT CAN GET THE FULL NAME OF EACH POSSIBLE STATE OR REGION.
+            .replace("STATE", deviceAddress.stateOrRegion)
+            .replace("DISTRICT", deviceAddress.districtOrCounty)
+            .replace("COUNTRY", deviceAddress.countryCode)
+            .replace("POSTALCODE", deviceAddress.postalCode);
         } else
           return profile.sendPermissionsCard(handlerInput, "device address", [
             "read::alexa:device:all:address",
@@ -65,9 +76,13 @@ async function PersonalInfoIntent(handlerInput) {
         break;
       case "distance_units":
         let distanceUnits = await profile.getDistanceUnits(handlerInput);
-        if (distanceUnits)
-          speakOutput = `Your device is using ${distanceUnits} units for distance.`;
-        else
+        if (distanceUnits) {
+          const distanceSpeech = await airtable.getRandomSpeech(
+            "PROFILEDISTANCE",
+            locale
+          );
+          speakOutput = distanceSpeech.replace("UNITS", distanceUnits);
+        } else
           speakOutput = await airtable.getRandomSpeech(
             "SimulatorNotSupported",
             locale
@@ -75,9 +90,13 @@ async function PersonalInfoIntent(handlerInput) {
         break;
       case "temperature_units":
         let temperatureUnits = await profile.getTemperatureUnits(handlerInput);
-        if (temperatureUnits)
-          speakOutput = `Your device is using ${temperatureUnits} for temperature.`;
-        else
+        if (temperatureUnits) {
+          const distanceSpeech = await airtable.getRandomSpeech(
+            "PROFILETEMPERATURE",
+            locale
+          );
+          speakOutput = distanceSpeech.replace("UNITS", distanceUnits);
+        } else
           speakOutput = await airtable.getRandomSpeech(
             "SimulatorNotSupported",
             locale
@@ -85,18 +104,22 @@ async function PersonalInfoIntent(handlerInput) {
         break;
       case "time_zone":
         let timeZone = await profile.getTimeZone(handlerInput);
-        if (timeZone)
-          speakOutput = `Your device is using the ${timeZone.replace(
-            "_",
-            " "
-          )} time zone.`;
-        else
+        if (timeZone) {
+          const timeZoneSpeech = await airtable.getRandomSpeech(
+            "PROFILETIMEZONE",
+            locale
+          );
+          speakOutput = timeZoneSpeech.replace(
+            "TIMEZONE",
+            timeZone.replace("_", " ")
+          );
+        } else
           speakOutput = await airtable.getRandomSpeech(
             "SimulatorNotSupported",
             locale
           );
         break;
-      case "given_name":
+      case "geocoordinates":
         let geocoordinates = await profile.getGeocoordinates(handlerInput);
         if (geocoordinates)
           speakOutput = `Your geocoordinates are ${geocoordinates}.`;

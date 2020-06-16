@@ -43,8 +43,7 @@ async function APLTemplateIntent(handlerInput) {
         );
     } else {
       //TODO: SHOW A LIST OF APL TEMPLATES WHEN ONE ISN'T INDICATED.
-      speakOutput =
-        "I should be showing you a list of APL templates, but that hasn't been built yet.";
+      speakOutput = await airtable.getRandomSpeech("APLLISTNOTBUILT", locale);
     }
   } else {
     const notSupported = await airtable.getRandomSpeech("NotSupported", locale);

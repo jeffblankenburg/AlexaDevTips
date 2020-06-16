@@ -1,6 +1,8 @@
 const airtable = require("../airtable");
 const helper = require("../helper");
 
+//TODO: WHEN I SAY "SAY TORPEDO" IT BREAKS. NO IDEA WHY.  INVESTIGATE.
+
 async function SpeechconIntent(handlerInput) {
   console.log("<=== handler/SpeechconIntent.js ===>");
   helper.setAction(handlerInput, "SPEECHCONINTENT");
@@ -16,22 +18,33 @@ async function SpeechconIntent(handlerInput) {
     speakOutput = helper.wrapSpeechcon(speechcon);
   } else {
     speechcon = await airtable.getRandomSpeechcon(locale);
-    if (spokenWords)
-      speakOutput =
-        "I heard you say " +
-        spokenWords +
-        ", but that isn't a speechcon for your locale. Here's a random one instead! " +
-        helper.wrapSpeechcon(speechcon);
-    else
-      speakOutput = `Here's a random speechcon for you! ${helper.wrapSpeechcon(
-        speechcon
-      )}`;
+
+    if (spokenWords) {
+      const speechconSpeech = await airtable.getRandomSpeech(
+        "SPEECHCONNOTFOUND",
+        locale
+      );
+      speakOutput = speechconSpeech
+        .replace("SPOKENWORDS", spokenWords)
+        .replace("LOCALE", locale.replace("-", ""))
+        .replace("SPEECHCON", helper.wrapSpeechcon(speechcon));
+    } else {
+      const speechconRandomSpeech = await airtable.getRandomSpeech(
+        "SPEECHCONRANDOM",
+        locale
+      );
+      speakOutput = speechconRandomSpeech.replace(
+        "SPEECHCON",
+        helper.wrapSpeechcon(speechcon)
+      );
+    }
   }
 
-  const achSpeech = await airtable.checkForAchievement(
-    handlerInput,
-    "SPEECHCON"
-  );
+  const [achSpeech, cardText] = await Promise.all([
+    airtable.checkForAchievement(handlerInput, "SPEECHCON"),
+    airtable.getRandomSpeech("SSMLCARD", locale),
+  ]);
+
   speakOutput = `${achSpeech} ${speakOutput}`;
 
   return handlerInput.responseBuilder
@@ -39,9 +52,12 @@ async function SpeechconIntent(handlerInput) {
     .reprompt(helper.changeVoice(actionQuery, handlerInput))
     .withSimpleCard(
       speechcon,
-      `You can use this speechcon in your skill with the following syntax:\n\n${helper.wrapSpeechcon(
-        speechcon
-      )}`
+      `${cardText
+        .replace("TYPE", "sound effect")
+        .replace(
+          "SYNTAX",
+          helper.wrapSpeechcon(speechcon).replace("<break time='.5s'/>", "")
+        )}`
     )
     .getResponse();
 }

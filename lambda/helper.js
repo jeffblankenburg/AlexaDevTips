@@ -163,14 +163,9 @@ function getRandomTwoCharacterString() {
 
 function changeVoice(speech, handlerInput) {
   const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-  if (sessionAttributes.user.PollyVoice != undefined) {
-    return (
-      "<voice name='" +
-      sessionAttributes.user.PollyVoice +
-      "'>" +
-      speech +
-      "</voice>"
-    );
+  const locale = getLocale(handlerInput);
+  if (sessionAttributes.user.Voice != undefined) {
+    return `<voice name='${sessionAttributes.user.Voice}'><lang xml:lang='${sessionAttributes.user.VoiceLocale}'>${speech}</lang></voice>`;
   } else return speech;
 }
 

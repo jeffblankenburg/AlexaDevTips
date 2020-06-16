@@ -56,9 +56,6 @@
         "name": "alexa::devices:all:address:full:read"
       },
       {
-        "name": "alexa::devices:all:address:full:read"
-      },
-      {
         "name": "alexa::skill:proactive_enablement"
       },
       {

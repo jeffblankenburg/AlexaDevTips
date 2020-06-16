@@ -6,3 +6,4 @@ lambda/.env
 .ask/lambda/.env
 package.json
 .vscode/launch.json
+.ask/

@@ -5,11 +5,17 @@ async function LaunchRequest(handlerInput) {
   console.log(`<=== handler/launchRequest.js ===>`);
   helper.setAction(handlerInput, "LAUNCHREQUEST");
   const locale = helper.getLocale(handlerInput);
+  const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+  let welcomeSpeechType = "WELCOME";
+  let actionSpeechType = "ACTIONQUERY";
+  if (sessionAttributes.isFirstTime) {
+    welcomeSpeechType += "FIRST";
+    actionSpeechType += "FIRST";
+  }
 
-  //TODO: IF THIS A USER'S FIRST TIME, GIVE THEM MORE BACKGROUND INFORMATION ABOUT WHAT IS POSSIBLE.
   const [speakOutput, actionQuery] = await Promise.all([
-    airtable.getRandomSpeech("Welcome", locale),
-    airtable.getRandomSpeech("ActionQuery", locale),
+    airtable.getRandomSpeech(welcomeSpeechType, locale),
+    airtable.getRandomSpeech(actionSpeechType, locale),
   ]);
 
   return handlerInput.responseBuilder

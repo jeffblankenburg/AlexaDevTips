@@ -58,7 +58,6 @@ async function PersonalInfoIntent(handlerInput) {
             "PROFILEADDRESS",
             locale
           );
-          //TODO: Don't talk about values that are null.
           speakOutput = addressSpeech
             .replace("ADDRESSLINE1", deviceAddress.addressLine1)
             .replace("ADDRESSLINE2", deviceAddress.addressLine2)
@@ -139,6 +138,7 @@ async function PersonalInfoIntent(handlerInput) {
         break;
     }
   } else {
+    speakOutput = await airtable.getRandomSpeech("PROFILESPECIFY", locale);
     //TODO: GET EVERYTHING WE HAVE ACCESS TO.
     //TODO: WHAT IF WE DON'T HAVE ACCESS TO ANYTHING?  WE SHOULD ASK USER TO UPDATE PERMISSIONS.  SEND CARD.
   }

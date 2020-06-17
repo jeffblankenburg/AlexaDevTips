@@ -70,6 +70,18 @@ const ChangeVoiceIntentHandler = {
   },
 };
 
+const GetNewsIntentHandler = {
+  canHandle(handlerInput) {
+    return (
+      Alexa.getRequestType(handlerInput.requestEnvelope) === "IntentRequest" &&
+      Alexa.getIntentName(handlerInput.requestEnvelope) === "GetNewsIntent"
+    );
+  },
+  async handle(handlerInput) {
+    return handlers.GetNewsIntent(handlerInput);
+  },
+};
+
 const HelpIntentHandler = {
   canHandle(handlerInput) {
     return (
@@ -113,7 +125,7 @@ const SpeechconIntentHandler = {
     );
   },
   async handle(handlerInput) {
-    return await handlers.SpeechconIntent(handlerInput);
+    return handlers.SpeechconIntent(handlerInput);
   },
 };
 
@@ -138,7 +150,7 @@ const SoundEffectIntentHandler = {
     );
   },
   async handle(handlerInput) {
-    return await handlers.SoundEffectIntent(handlerInput);
+    return handlers.SoundEffectIntent(handlerInput);
   },
 };
 
@@ -162,8 +174,8 @@ const IntentReflectorHandler = {
       Alexa.getRequestType(handlerInput.requestEnvelope) === "IntentRequest"
     );
   },
-  async handle(handlerInput) {
-    return await handlers.intentReflector(handlerInput);
+  handle(handlerInput) {
+    return handlers.intentReflector(handlerInput);
   },
 };
 
@@ -206,6 +218,7 @@ exports.handler = Alexa.SkillBuilders.custom()
   .addRequestHandlers(
     LaunchRequestHandler,
     AnswerIntentHandler,
+    GetNewsIntentHandler,
     APLTemplateIntentHandler,
     AchievementIntentHandler,
     PersonalInfoIntentHandler,

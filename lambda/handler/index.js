@@ -2,6 +2,7 @@ const AchievementIntent = require("./AchievementIntent");
 const AnswerIntent = require("./AnswerIntent");
 const APLTemplateIntent = require("./APLTemplateIntent");
 const ChangeVoiceIntent = require("./ChangeVoiceIntent");
+const GetNewsIntent = require("./GetNewsIntent");
 const LaunchRequest = require("./LaunchRequest");
 const PersonalInfoIntent = require("./PersonalInfoIntent");
 const SoundEffectIntent = require("./SoundEffectIntent");
@@ -14,6 +15,7 @@ module.exports = {
   AnswerIntent,
   APLTemplateIntent,
   ChangeVoiceIntent,
+  GetNewsIntent,
   LaunchRequest,
   PersonalInfoIntent,
   SoundEffectIntent,

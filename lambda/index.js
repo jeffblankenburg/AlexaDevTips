@@ -70,6 +70,18 @@ const ChangeVoiceIntentHandler = {
   },
 };
 
+const GetNewsIntentHandler = {
+  canHandle(handlerInput) {
+    return (
+      Alexa.getRequestType(handlerInput.requestEnvelope) === "IntentRequest" &&
+      Alexa.getIntentName(handlerInput.requestEnvelope) === "GetNewsIntent"
+    );
+  },
+  async handle(handlerInput) {
+    return handlers.GetNewsIntent(handlerInput);
+  },
+};
+
 const HelpIntentHandler = {
   canHandle(handlerInput) {
     return (
@@ -206,6 +218,7 @@ exports.handler = Alexa.SkillBuilders.custom()
   .addRequestHandlers(
     LaunchRequestHandler,
     AnswerIntentHandler,
+    GetNewsIntentHandler,
     APLTemplateIntentHandler,
     AchievementIntentHandler,
     PersonalInfoIntentHandler,

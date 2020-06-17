@@ -34,7 +34,7 @@ async function ChangeVoiceIntent(handlerInput) {
   }
   const [actionQuery, voiceCard] = await Promise.all([
     await airtable.getRandomSpeech(`ACTIONQUERY`, locale),
-    await airtable.getRandomSpeech(`VOICECARD`, locale),
+    await airtable.getRandomSpeech(`SSMLCARD`, locale),
   ]);
 
   speakOutput = `${achSpeech} ${speakOutput}`;

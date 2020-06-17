@@ -1,8 +1,6 @@
 const airtable = require("../airtable");
 const helper = require("../helper");
 
-//TODO: WHEN I SAY "SAY TORPEDO" IT BREAKS. NO IDEA WHY.  INVESTIGATE.
-
 async function SpeechconIntent(handlerInput) {
   console.log("<=== handler/SpeechconIntent.js ===>");
   helper.setAction(handlerInput, "SPEECHCONINTENT");

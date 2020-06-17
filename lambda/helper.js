@@ -21,6 +21,14 @@ function getSpokenWords(handlerInput, slot) {
   //return handlerInput?.requestEnvelope?.request?.intent?.slots?.[slot]?.value?
 }
 
+function createNewsSpeech(records) {
+  let newsSpeech = "";
+  for (var i = 0; i < records.length; i++) {
+    newsSpeech += `<amazon:domain name="news"><audio src="soundbank://soundlibrary/musical/amzn_sfx_electronic_beep_02"/>${records[i].fields.Headline} ${records[i].fields.Body}</amazon:domain>`;
+  }
+  return newsSpeech;
+}
+
 function getResolvedWords(handlerInput, slot) {
   if (
     _.get(
@@ -201,6 +209,7 @@ function isGeolocationSupported(handlerInput) {
 
 module.exports = {
   convertLinkToSpeech,
+  createNewsSpeech,
   getSpokenWords,
   getResolvedWords,
   getDisambiguationString,

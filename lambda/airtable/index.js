@@ -2,6 +2,7 @@ const checkForAchievement = require("./checkForAchievement");
 const getAchievementCount = require("./getAchievementCount");
 const getItemByRecordId = require("./getItemByRecordId");
 const getLeaderboard = require("./getLeaderboard");
+const getNews = require("./getNews");
 const getRandomSpeech = require("./getRandomSpeech");
 const getRandomSoundEffect = require("./getRandomSoundEffect");
 const getRandomSpeechcon = require("./getRandomSpeechcon");
@@ -17,6 +18,7 @@ module.exports = {
   getAchievementCount,
   getItemByRecordId,
   getLeaderboard,
+  getNews,
   getRandomSoundEffect,
   getRandomSpeech,
   getRandomSpeechcon,

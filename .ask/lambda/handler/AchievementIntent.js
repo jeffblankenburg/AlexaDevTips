@@ -13,7 +13,6 @@ async function AchievementIntent(handlerInput) {
     "LEADERBOARD"
   );
 
-  //TODO: IF THIS A USER'S FIRST TIME, GIVE THEM MORE BACKGROUND INFORMATION ABOUT WHAT IS POSSIBLE.
   const [
     achievementCount,
     leaderboard,

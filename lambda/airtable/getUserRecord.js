@@ -4,6 +4,7 @@ const fetch = require("node-fetch");
 
 function getUserRecord(handlerInput) {
   console.log(`<=== airtable/getUserRecord.js ===>`);
+  const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
   const userId = handlerInput.requestEnvelope.context.System.user.userId;
 
   const url = `https://api.airtable.com/v0/${
@@ -21,6 +22,8 @@ function getUserRecord(handlerInput) {
     .then((res) => res.json())
     .then((r) => {
       if (r.records.length === 0) {
+        sessionAttributes.isFirstTime = true;
+        handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
         return createUserRecord(userId);
       } else return r.records[0];
     });

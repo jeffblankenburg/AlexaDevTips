@@ -27,7 +27,7 @@ async function checkForAchievement(handlerInput, code) {
             userRecordId,
             achievement.fields.RecordId
           );
-          const achievementSound = await airtable.getRandomSpeech("ACHIEVEMENTUNLOCKED");
+          const achievementSound = ""; //await airtable.getRandomSpeech("ACHIEVEMENTUNLOCKED");
           return `${achievementSound} ${achievement.fields.Description}`;
         }
       }

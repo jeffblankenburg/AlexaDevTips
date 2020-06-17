@@ -113,7 +113,7 @@ const SpeechconIntentHandler = {
     );
   },
   async handle(handlerInput) {
-    return await handlers.SpeechconIntent(handlerInput);
+    return handlers.SpeechconIntent(handlerInput);
   },
 };
 
@@ -138,7 +138,7 @@ const SoundEffectIntentHandler = {
     );
   },
   async handle(handlerInput) {
-    return await handlers.SoundEffectIntent(handlerInput);
+    return handlers.SoundEffectIntent(handlerInput);
   },
 };
 
@@ -162,8 +162,8 @@ const IntentReflectorHandler = {
       Alexa.getRequestType(handlerInput.requestEnvelope) === "IntentRequest"
     );
   },
-  async handle(handlerInput) {
-    return await handlers.intentReflector(handlerInput);
+  handle(handlerInput) {
+    return handlers.intentReflector(handlerInput);
   },
 };
 

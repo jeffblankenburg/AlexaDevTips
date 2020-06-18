@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "chewbacca cup",
+      "invocationName": "dev tips",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",
@@ -102,43 +102,6 @@
             "{voice}",
             "change the voice"
           ]
-        },
-        {
-          "name": "DisplayTemplateIntent",
-          "slots": [
-            {
-              "name": "displaytemplate",
-              "type": "DisplayTemplate"
-            }
-          ],
-          "samples": [
-            "show me {displaytemplate}",
-            "{displaytemplate}",
-            "draw {displaytemplate}",
-            "let me see {displaytemplate}",
-            "put {displaytemplate}",
-            "put {displaytemplate} on the screen"
-          ]
-        },
-        {
-          "name": "TimerIntent",
-          "slots": [
-            {
-              "name": "timerDuration",
-              "type": "AMAZON.NUMBER"
-            }
-          ],
-          "samples": ["set a {timerDuration} second timer"]
-        },
-        {
-          "name": "FeatureSwitchIntent",
-          "slots": [
-            {
-              "name": "feature",
-              "type": "Feature"
-            }
-          ],
-          "samples": ["turn on {feature}", "turn off {feature}"]
         },
         {
           "name": "APLTemplateIntent",

@@ -6,16 +6,19 @@ async function GetNewsIntent(handlerInput) {
   helper.setAction(handlerInput, "GETNEWSINTENT");
   const locale = helper.getLocale(handlerInput);
 
-  const [news, actionQuery] = await Promise.all([
+  const [news, actionQuery, newsIntro] = await Promise.all([
     airtable.getNews(locale),
     airtable.getRandomSpeech("ACTIONQUERY", locale),
+    airtable.getRandomSpeech("NEWSINTRO", locale),
   ]);
 
-  const speakOutput = helper.createNewsSpeech(news);
+  const speakOutput = `${newsIntro} ${helper.createNewsSpeech(news)}`;
+  const cardOutput = helper.createNewsCard(news);
 
   return handlerInput.responseBuilder
     .speak(helper.changeVoice(`${speakOutput} ${actionQuery}`, handlerInput))
     .reprompt(helper.changeVoice(actionQuery, handlerInput))
+    .withSimpleCard("LATEST ALEXA DEVELOPER NEWS", cardOutput)
     .getResponse();
 }
 

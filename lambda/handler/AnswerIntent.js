@@ -11,12 +11,10 @@ async function AnswerIntent(handlerInput) {
   let actionQuery = await airtable.getRandomSpeech("ActionQuery", locale);
   let rb = handlerInput.responseBuilder;
 
-  if (resolvedWords && resolvedWords.length === 1) {
-    const answer = await airtable.getItemByRecordId(
-      process.env.airtable_base_data,
-      "Answer",
-      resolvedWords[0].value.id
-    );
+  const answers = await airtable.getAnswers(resolvedWords);
+
+  if (answers && answers.length === 1) {
+    const answer = answers[0];
     let name = answer.fields.Name;
     if (answer.fields.Pronunciation) name = answer.fields.Pronunciation;
     const answerConfirmation = await airtable.getRandomSpeech(
@@ -38,7 +36,7 @@ async function AnswerIntent(handlerInput) {
       rb.withSimpleCard(answer.fields.Name, cardResponse);
     }
     airtable.updateUserAnswers(handlerInput, resolvedWords[0].value.id);
-  } else if (resolvedWords && resolvedWords.length > 1) {
+  } else if (answers && answers.length > 1) {
     helper.setAction(handlerInput, "ANSWERINTENT - DISAMBIGUATION");
     const disambiguation = await airtable.getRandomSpeech(
       "Disambiguation",
@@ -46,12 +44,9 @@ async function AnswerIntent(handlerInput) {
     );
     actionQuery = "";
     speakOutput = disambiguation
-      .replace("COUNT", resolvedWords.length)
+      .replace("COUNT", answers.length)
       .replace("SPOKENWORDS", spokenWords)
-      .replace(
-        "RESOLVEDLIST",
-        await helper.getDisambiguationString(resolvedWords)
-      );
+      .replace("RESOLVEDLIST", await helper.getDisambiguationString(answers));
   } else {
     //TODO: WHAT DO WE DO IF THEY HAVE HEARD ALL THE THINGS?
     if (spokenWords) {

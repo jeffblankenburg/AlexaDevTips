@@ -1,5 +1,6 @@
 const checkForAchievement = require("./checkForAchievement");
 const getAchievementCount = require("./getAchievementCount");
+const getAnswers = require("./getAnswers");
 const getItemByRecordId = require("./getItemByRecordId");
 const getLeaderboard = require("./getLeaderboard");
 const getNews = require("./getNews");
@@ -16,6 +17,7 @@ const updateUserAnswers = require("./updateUserAnswers");
 module.exports = {
   checkForAchievement,
   getAchievementCount,
+  getAnswers,
   getItemByRecordId,
   getLeaderboard,
   getNews,

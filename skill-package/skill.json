@@ -3,59 +3,144 @@
     "publishingInformation": {
       "locales": {
         "en-US": {
-          "summary": "Sample Short Description",
           "examplePhrases": [
-            "Alexa open hello world",
-            "hello",
-            "help"
+            "Alexa ask Dev Tips",
+            "what's new",
+            "say bazinga"
           ],
-          "name": "AlexaDevTips",
-          "description": "Sample Full Description"
+          "keywords": [
+            "alexa",
+            "developer",
+            "lambda",
+            "vui",
+            "voice",
+            "voice",
+            "user",
+            "interface",
+            "node",
+            "javascript",
+            "news",
+            "python",
+            "skill"
+          ],
+          "name": "Alexa Dev Tips",
+          "summary": "Meet Dev Tips, your companion for the skill-building journey. Find the news, tips, and resources you need to build your best skill—all via voice.",
+          "description": "Building skills to make Alexa smarter? Alexa can help! Meet Dev Tips, your companion for the skill-building journey. This skill is designed to connect you with the news, tips, and resources you need to build your best skill—all via voice.\n\nAs you build your skills, you’ll likely have questions about how to add features or enhance existing ones. Simply enable the Dev Tips skill and ask Alexa for help, like \"Alexa, ask Dev Tips about persistence.\" If you don’t have a specific question, you can also just say, \"Alexa, ask Dev Tips for something cool,\" and Alexa will randomly pick something from her knowledge base to help you broaden your development skills. And if you’d like to hear the latest Alexa news and announcements, simply say, \"Alexa, ask Dev Tips what’s new.\"\n\nEnable Dev Tips now and let Alexa be your co-pilot.",
+          "smallIconUri": "https://s3.amazonaws.com/jeffblankenburg.alexa/alexa-dev-tips/APP_ICON.png",
+          "largeIconUri": "https://s3.amazonaws.com/jeffblankenburg.alexa/alexa-dev-tips/APP_ICON_LARGE.png"
         },
         "en-IN": {
-          "summary": "Sample Short Description",
           "examplePhrases": [
-            "Alexa open hello world",
-            "hello",
-            "help"
+            "Alexa ask Dev Tips",
+            "what's new",
+            "say bazinga"
           ],
-          "name": "AlexaDevTips",
-          "description": "Sample Full Description"
+          "keywords": [
+            "alexa",
+            "developer",
+            "lambda",
+            "vui",
+            "voice",
+            "voice",
+            "user",
+            "interface",
+            "node",
+            "javascript",
+            "news",
+            "python",
+            "skill"
+          ],
+          "name": "Alexa Dev Tips",
+          "summary": "Meet Dev Tips, your companion for the skill-building journey. Find the news, tips, and resources you need to build your best skill—all via voice.",
+          "description": "Building skills to make Alexa smarter? Alexa can help! Meet Dev Tips, your companion for the skill-building journey. This skill is designed to connect you with the news, tips, and resources you need to build your best skill—all via voice.\n\nAs you build your skills, you’ll likely have questions about how to add features or enhance existing ones. Simply enable the Dev Tips skill and ask Alexa for help, like \"Alexa, ask Dev Tips about persistence.\" If you don’t have a specific question, you can also just say, \"Alexa, ask Dev Tips for something cool,\" and Alexa will randomly pick something from her knowledge base to help you broaden your development skills. And if you’d like to hear the latest Alexa news and announcements, simply say, \"Alexa, ask Dev Tips what’s new.\"\n\nEnable Dev Tips now and let Alexa be your co-pilot.",
+          "smallIconUri": "https://s3.amazonaws.com/jeffblankenburg.alexa/alexa-dev-tips/APP_ICON.png",
+          "largeIconUri": "https://s3.amazonaws.com/jeffblankenburg.alexa/alexa-dev-tips/APP_ICON_LARGE.png"
         },
         "en-GB": {
-          "summary": "Sample Short Description",
           "examplePhrases": [
-            "Alexa open hello world",
-            "hello",
-            "help"
+            "Alexa ask Dev Tips",
+            "what's new",
+            "say bazinga"
           ],
-          "name": "AlexaDevTips",
-          "description": "Sample Full Description"
+          "keywords": [
+            "alexa",
+            "developer",
+            "lambda",
+            "vui",
+            "voice",
+            "voice",
+            "user",
+            "interface",
+            "node",
+            "javascript",
+            "news",
+            "python",
+            "skill"
+          ],
+          "name": "Alexa Dev Tips",
+          "summary": "Meet Dev Tips, your companion for the skill-building journey. Find the news, tips, and resources you need to build your best skill—all via voice.",
+          "description": "Building skills to make Alexa smarter? Alexa can help! Meet Dev Tips, your companion for the skill-building journey. This skill is designed to connect you with the news, tips, and resources you need to build your best skill—all via voice.\n\nAs you build your skills, you’ll likely have questions about how to add features or enhance existing ones. Simply enable the Dev Tips skill and ask Alexa for help, like \"Alexa, ask Dev Tips about persistence.\" If you don’t have a specific question, you can also just say, \"Alexa, ask Dev Tips for something cool,\" and Alexa will randomly pick something from her knowledge base to help you broaden your development skills. And if you’d like to hear the latest Alexa news and announcements, simply say, \"Alexa, ask Dev Tips what’s new.\"\n\nEnable Dev Tips now and let Alexa be your co-pilot.",
+          "smallIconUri": "https://s3.amazonaws.com/jeffblankenburg.alexa/alexa-dev-tips/APP_ICON.png",
+          "largeIconUri": "https://s3.amazonaws.com/jeffblankenburg.alexa/alexa-dev-tips/APP_ICON_LARGE.png"
         },
         "en-CA": {
-          "summary": "Sample Short Description",
           "examplePhrases": [
-            "Alexa open hello world",
-            "hello",
-            "help"
+            "Alexa ask Dev Tips",
+            "what's new",
+            "say bazinga"
           ],
-          "name": "AlexaDevTips",
-          "description": "Sample Full Description"
+          "keywords": [
+            "alexa",
+            "developer",
+            "lambda",
+            "vui",
+            "voice",
+            "voice",
+            "user",
+            "interface",
+            "node",
+            "javascript",
+            "news",
+            "python",
+            "skill"
+          ],
+          "name": "Alexa Dev Tips",
+          "summary": "Meet Dev Tips, your companion for the skill-building journey. Find the news, tips, and resources you need to build your best skill—all via voice.",
+          "description": "Building skills to make Alexa smarter? Alexa can help! Meet Dev Tips, your companion for the skill-building journey. This skill is designed to connect you with the news, tips, and resources you need to build your best skill—all via voice.\n\nAs you build your skills, you’ll likely have questions about how to add features or enhance existing ones. Simply enable the Dev Tips skill and ask Alexa for help, like \"Alexa, ask Dev Tips about persistence.\" If you don’t have a specific question, you can also just say, \"Alexa, ask Dev Tips for something cool,\" and Alexa will randomly pick something from her knowledge base to help you broaden your development skills. And if you’d like to hear the latest Alexa news and announcements, simply say, \"Alexa, ask Dev Tips what’s new.\"\n\nEnable Dev Tips now and let Alexa be your co-pilot.",
+          "smallIconUri": "https://s3.amazonaws.com/jeffblankenburg.alexa/alexa-dev-tips/APP_ICON.png",
+          "largeIconUri": "https://s3.amazonaws.com/jeffblankenburg.alexa/alexa-dev-tips/APP_ICON_LARGE.png"
         },
         "en-AU": {
-          "summary": "Sample Short Description",
           "examplePhrases": [
-            "Alexa open hello world",
-            "hello",
-            "help"
+            "Alexa ask Dev Tips",
+            "what's new",
+            "say bazinga"
           ],
-          "name": "AlexaDevTips",
-          "description": "Sample Full Description"
+          "keywords": [
+            "alexa",
+            "developer",
+            "lambda",
+            "vui",
+            "voice",
+            "voice",
+            "user",
+            "interface",
+            "node",
+            "javascript",
+            "news",
+            "python",
+            "skill"
+          ],
+          "name": "Alexa Dev Tips",
+          "summary": "Meet Dev Tips, your companion for the skill-building journey. Find the news, tips, and resources you need to build your best skill—all via voice.",
+          "description": "Building skills to make Alexa smarter? Alexa can help! Meet Dev Tips, your companion for the skill-building journey. This skill is designed to connect you with the news, tips, and resources you need to build your best skill—all via voice.\n\nAs you build your skills, you’ll likely have questions about how to add features or enhance existing ones. Simply enable the Dev Tips skill and ask Alexa for help, like \"Alexa, ask Dev Tips about persistence.\" If you don’t have a specific question, you can also just say, \"Alexa, ask Dev Tips for something cool,\" and Alexa will randomly pick something from her knowledge base to help you broaden your development skills. And if you’d like to hear the latest Alexa news and announcements, simply say, \"Alexa, ask Dev Tips what’s new.\"\n\nEnable Dev Tips now and let Alexa be your co-pilot.",
+          "smallIconUri": "https://s3.amazonaws.com/jeffblankenburg.alexa/alexa-dev-tips/APP_ICON.png",
+          "largeIconUri": "https://s3.amazonaws.com/jeffblankenburg.alexa/alexa-dev-tips/APP_ICON_LARGE.png"
         }
       },
       "isAvailableWorldwide": true,
       "testingInstructions": "Sample Testing Instructions.",
-      "category": "KNOWLEDGE_AND_TRIVIA",
+      "category": "EDUCATION_AND_REFERENCE",
       "distributionCountries": []
     },
     "apis": {
@@ -111,8 +196,24 @@
       "containsAds": false,
       "locales": {
         "en-US": {
-          "privacyPolicyUrl": "http://www.myprivacypolicy.sampleskill.com",
-          "termsOfUseUrl": "http://www.termsofuse.sampleskill.com"
+          "privacyPolicyUrl": "http://jeffblankenburg.com/privacy",
+          "termsOfUseUrl": "http://jeffblankenburg.com/privacy"
+        },
+        "en-AU": {
+          "privacyPolicyUrl": "http://jeffblankenburg.com/privacy",
+          "termsOfUseUrl": "http://jeffblankenburg.com/privacy"
+        },
+        "en-GB": {
+          "privacyPolicyUrl": "http://jeffblankenburg.com/privacy",
+          "termsOfUseUrl": "http://jeffblankenburg.com/privacy"
+        },
+        "en-IN": {
+          "privacyPolicyUrl": "http://jeffblankenburg.com/privacy",
+          "termsOfUseUrl": "http://jeffblankenburg.com/privacy"
+        },
+        "en-CA": {
+          "privacyPolicyUrl": "http://jeffblankenburg.com/privacy",
+          "termsOfUseUrl": "http://jeffblankenburg.com/privacy"
         }
       }
     }

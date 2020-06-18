@@ -3,7 +3,7 @@ const fetch = require("node-fetch");
 
 function getItemByRecordId(base, table, recordId) {
   console.log(`<=== airtable/getItemByRecordId.js ===>`);
-  const url = `https://api.airtable.com/v0/${base}/${table}?api_key=${process.env.airtable_api_key}&filterByFormula=AND(RecordId="${recordId}")`;
+  const url = `https://api.airtable.com/v0/${base}/${table}?api_key=${process.env.airtable_api_key}&filterByFormula=AND(IsDisabled%3DFALSE(),RecordId="${recordId}")`;
   //console.log(`FULL PATH ${url}`);
   const options = {
     method: "GET",

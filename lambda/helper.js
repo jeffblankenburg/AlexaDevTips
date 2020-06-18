@@ -24,9 +24,19 @@ function getSpokenWords(handlerInput, slot) {
 function createNewsSpeech(records) {
   let newsSpeech = "";
   for (var i = 0; i < records.length; i++) {
-    newsSpeech += `<amazon:domain name="news"><audio src="soundbank://soundlibrary/musical/amzn_sfx_electronic_beep_02"/>${records[i].fields.Headline} ${records[i].fields.Body}</amazon:domain>`;
+    newsSpeech += `<amazon:domain name="news"><audio src="soundbank://soundlibrary/musical/amzn_sfx_electronic_beep_02"/>${records[i].fields.VoiceHeadline} ${records[i].fields.VoiceBody}</amazon:domain>`;
   }
   return newsSpeech;
+}
+
+function createNewsCard(records) {
+  let newsCard = "";
+  for (var i = 0; i < records.length; i++) {
+    newsCard += `${records[i].fields.CardHeadline.toUpperCase()}\n${
+      records[i].fields.CardBody
+    }\n${records[i].fields.LinkPrefix} ${records[i].fields.Link}\n\n`;
+  }
+  return newsCard;
 }
 
 function getResolvedWords(handlerInput, slot) {
@@ -58,18 +68,13 @@ function getResolvedWords(handlerInput, slot) {
 }
 
 async function getDisambiguationString(values) {
-  const airtable = require("./airtable");
   let string = "";
   for (var i = 0; i < values.length; i++) {
     if (i != 0) string += ", ";
     if (i === values.length - 1) string += " or ";
-    const record = await airtable.getItemByRecordId(
-      process.env.airtable_base_data,
-      "Answer",
-      values[i].value.id
-    );
-    if (record.fields.Pronunciation) string += record.fields.Pronunciation;
-    else string += values[i].value.name;
+    if (values[i].fields.Pronunciation)
+      string += values[i].fields.Pronunciation;
+    else string += values[i].fields.Name;
   }
   return string;
 }
@@ -209,6 +214,7 @@ function isGeolocationSupported(handlerInput) {
 
 module.exports = {
   convertLinkToSpeech,
+  createNewsCard,
   createNewsSpeech,
   getSpokenWords,
   getResolvedWords,

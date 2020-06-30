@@ -117,18 +117,6 @@ const PersonalInfoIntentHandler = {
   },
 };
 
-const SpeechconIntentHandler = {
-  canHandle(handlerInput) {
-    return (
-      Alexa.getRequestType(handlerInput.requestEnvelope) === "IntentRequest" &&
-      Alexa.getIntentName(handlerInput.requestEnvelope) === "SpeechconIntent"
-    );
-  },
-  async handle(handlerInput) {
-    return handlers.SpeechconIntent(handlerInput);
-  },
-};
-
 const RepeatIntentHandler = {
   canHandle(handlerInput) {
     return (
@@ -139,6 +127,18 @@ const RepeatIntentHandler = {
   },
   async handle(handlerInput) {
     return AMAZON.RepeatIntent(handlerInput);
+  },
+};
+
+const SpeechconIntentHandler = {
+  canHandle(handlerInput) {
+    return (
+      Alexa.getRequestType(handlerInput.requestEnvelope) === "IntentRequest" &&
+      Alexa.getIntentName(handlerInput.requestEnvelope) === "SpeechconIntent"
+    );
+  },
+  async handle(handlerInput) {
+    return handlers.SpeechconIntent(handlerInput);
   },
 };
 

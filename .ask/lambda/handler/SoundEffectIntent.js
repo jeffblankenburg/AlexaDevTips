@@ -41,24 +41,22 @@ async function SoundEffectIntent(handlerInput) {
   ]);
   speakOutput = `${achSpeech} ${speakOutput}`;
 
-  return (
-    handlerInput.responseBuilder
-      .speak(helper.changeVoice(speakOutput + " " + actionQuery, handlerInput))
-      .reprompt(helper.changeVoice(actionQuery, handlerInput))
-      // .withSimpleCard(
-      //   soundEffect.Name,
-      //   `${cardText
-      //     .replace("TYPE", "sound effect")
-      //     .replace(
-      //       "SYNTAX",
-      //       helper.wrapSoundEffect(
-      //         soundEffect.fields.Category,
-      //         soundEffect.fields.Name
-      //       )
-      //     )}`
-      // )
-      .getResponse()
-  );
+  return handlerInput.responseBuilder
+    .speak(helper.changeVoice(speakOutput + " " + actionQuery, handlerInput))
+    .reprompt(helper.changeVoice(actionQuery, handlerInput))
+    .withSimpleCard(
+      soundEffect.Name,
+      `${cardText
+        .replace("TYPE", "sound effect")
+        .replace(
+          "SYNTAX",
+          helper.wrapSoundEffect(
+            soundEffect.fields.Category,
+            soundEffect.fields.Name
+          )
+        )}`
+    )
+    .getResponse();
 }
 
 module.exports = SoundEffectIntent;

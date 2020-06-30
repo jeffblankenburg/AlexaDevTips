@@ -138,7 +138,7 @@ function wrapSpeechcon(speechcon) {
 }
 
 function wrapSoundEffect(category, effect) {
-  return `<audio src='soundbank://soundlibrary/${category}${effect}' />`;
+  return `<audio src='soundbank://soundlibrary/${category}/${effect}' />`;
 }
 
 function getRandomTwoCharacterString() {

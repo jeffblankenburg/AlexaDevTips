@@ -77,7 +77,7 @@
             "python",
             "skill"
           ],
-          "name": "Alexa Dev Tips",
+          "name": "Dev Tips",
           "summary": "Meet Dev Tips, your companion for the skill-building journey. Find the news, tips, and resources you need to build your best skill—all via voice.",
           "description": "Building skills to make Alexa smarter? Meet Dev Tips, your companion for the skill-building journey. This skill is designed to connect you with the news, tips, and resources you need to build your best skill—all via voice.\n\nAs you build your skills, you’ll likely have questions about how to add features or enhance existing ones. Simply enable the Dev Tips skill and ask for help, like \"Alexa, ask Dev Tips about persistence.\" If you don’t have a specific question, you can also just say, \"Alexa, ask Dev Tips for something new,\" and DevTips will randomly pick something from the knowledge base to help you broaden your development skills. And if you’d like to hear the latest Alexa Developer news and announcements, simply say, \"Alexa, ask Dev Tips for the news.\"\n\nEnable Dev Tips now to have a skill development co-pilot.",
           "smallIconUri": "https://s3.amazonaws.com/jeffblankenburg.alexa/alexa-dev-tips/APP_ICON.png",
@@ -139,7 +139,7 @@
         }
       },
       "isAvailableWorldwide": true,
-      "testingInstructions": "Sample Testing Instructions.",
+      "testingInstructions": "NOTES from previous failed submission:  1) This is a completely relevant response. When a user asks the skill for new information, like what's new or what's the news, they are asking about the latest releases and information, which are featured in the GetNewsIntent. This is working as expected.  In regard to the 'You used the Speechcon intent' issue, this is part of a larger achievement feature which rewards users for trying different parts of the skill.  This will only happen on their first attempt to use an intent, and since the audience for this skill is skill developers, they should be keenly aware of the intents they are using.",
       "category": "EDUCATION_AND_REFERENCE",
       "distributionCountries": []
     },

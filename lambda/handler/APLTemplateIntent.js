@@ -47,7 +47,7 @@ async function APLTemplateIntent(handlerInput) {
     }
   } else {
     const notSupported = await airtable.getRandomSpeech("NotSupported", locale);
-    speakOutput = notsupported.replace("THING", "APL");
+    speakOutput = notSupported.replace("THING", "APL");
   }
 
   const achSpeech = await airtable.checkForAchievement(handlerInput, "APL");

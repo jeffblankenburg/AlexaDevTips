@@ -26,7 +26,7 @@ async function PersonalInfoIntent(handlerInput) {
             "alexa::profile:email:read",
           ]);
         break;
-      case "full_name":
+      case "name":
         let name = await profile.getName(handlerInput);
         if (name) {
           nameSpeech = await airtable.getRandomSpeech("PROFILENAME", locale);

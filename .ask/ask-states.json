@@ -9,8 +9,8 @@
               "iamRole": "arn:aws:iam::679180307287:role/ask-lambda-AlexaDevTips-1589384880853",
               "lambda": {
                 "arn": "arn:aws:lambda:us-east-1:679180307287:function:ask-alexadevtips-default-default-1589384881546",
-                "lastModified": "2020-06-24T14:19:19.760+0000",
-                "revisionId": "e77d6703-617d-4a71-9513-e6fb15e51342"
+                "lastModified": "2020-07-06T15:32:26.417+0000",
+                "revisionId": "21bcd16b-480e-4d60-9d44-c35f97e86e4b"
               }
             }
           }
@@ -18,11 +18,11 @@
       },
       "skillId": "amzn1.ask.skill.a44bb8bf-29d5-4912-868d-80e1c8b9d4d8",
       "skillMetadata": {
-        "lastDeployHash": "fOICcit/Z5ef8M2Fs2zgfLMPirs="
+        "lastDeployHash": "bF5/Rk4l48a9xIwe3j7itArzfQI="
       },
       "code": {
         "default": {
-          "lastDeployHash": "XlychHO5VqDDhVSe6GIOzxc9UrU="
+          "lastDeployHash": "Dgq7+cucG29RYv6CkbNZmODeYms="
         }
       }
     }

@@ -27,8 +27,8 @@ async function checkForAchievement(handlerInput, code) {
             userRecordId,
             achievement.fields.RecordId
           );
-          const achievementSound = ""; //await airtable.getRandomSpeech("ACHIEVEMENTUNLOCKED");
-          return `${achievementSound} ${achievement.fields.Description}`;
+          const achievementSound = `<audio src="soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_02"/> Achievement Unlocked!`; //await airtable.getRandomSpeech("ACHIEVEMENTUNLOCKED");
+          return ""; // `${achievementSound} ${achievement.fields.Description}`;
         }
       }
 
